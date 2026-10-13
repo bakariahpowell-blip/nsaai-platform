@@ -45,7 +45,7 @@ const options = {
       parts: [{ text: m.text }]
     })),
     generationConfig: {
-      maxOutputTokens: 2048,
+      maxOutputTokens: 512,
       thinkingConfig: { thinkingLevel: 'low' }
     }
   })
