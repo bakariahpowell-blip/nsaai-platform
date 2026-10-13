@@ -3879,9 +3879,29 @@ function makeStudioTitleFromPrompt(prompt=""){
   return clean.length > 38 ? clean.slice(0, 38) + "…" : clean;
 }
 
-function studioMessageHTML(text=""){
-  return sanitize(text).replace(/\n/g, "<br>");
+
+function studioMessageHTML(text="", role="assistant"){
+  const content = String(text || "");
+
+  // Keep user messages as safe, plain text.
+  if (role === "user"){
+    return sanitize(content).replace(/\n/g, "<br>");
+  }
+
+  // Format AI responses using Markdown.
+  if (typeof marked !== "undefined" && typeof DOMPurify !== "undefined"){
+    const html = marked.parse(content, {
+      gfm: true,
+      breaks: true
+    });
+
+    return DOMPurify.sanitize(html);
+  }
+
+  // Safe fallback if Markdown libraries are unavailable.
+  return sanitize(content).replace(/\n/g, "<br>");
 }
+
 
 function renderStudio(){
   const data = getStudioData();
