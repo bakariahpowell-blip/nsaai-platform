@@ -31,7 +31,25 @@ export default async (request)=>{
     body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents:messages.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.text}]})),generationConfig:{temperature:0.7,maxOutputTokens:1000}})
   });
   const result=await response.json().catch(()=>({}));
-  if(!response.ok){const msg=response.status===429?'Free-tier limit reached. Please try again later.':response.status===400?'Gemini rejected the request; check your model setting.':'AI provider unavailable. Please try again later.';return json({error:msg},response.status===429?429:502)}
+  
+if (!response.ok) {
+  const providerMessage =
+    result.error?.message || "Unknown Gemini API error";
+
+  const providerCode =
+    result.error?.status || "UNKNOWN";
+
+  console.error("Gemini API request failed", {
+    httpStatus: response.status,
+    providerCode,
+    providerMessage
+  });
+
+  return json({
+    error: `Gemini error ${response.status}: ${providerMessage}`
+  }, 502);
+}
+
   const reply=(result.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('\n').trim();
   if(!reply)return json({error:'No response was generated. Try rephrasing your question.'},502);
   return json({reply});
