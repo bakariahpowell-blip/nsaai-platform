@@ -90,5 +90,12 @@ if (!response.ok) {
   const reply=(result.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('\n').trim();
   if(!reply)return json({error:'No response was generated. Try rephrasing your question.'},502);
   return json({reply});
- }catch(e){return json({error:'Studio AI timed out or could not connect. Try again.'},504)}finally{clearTimeout(timer)}
+ }catch(e){
+  console.error('Studio AI request failed:', e);
+  return json({
+    error: e.name === 'AbortError'
+      ? 'Gemini request exceeded the time limit.'
+      : 'Studio AI encountered a connection error.'
+  },504);
+}finally{clearTimeout(timer)}
 };
