@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>The NSAAI App</title>
+  <link rel="preconnect" href="https://astounding-fox-200f78.netlify.app">
+<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preconnect" href="https://www.youtube-nocookie.com">
+<link rel="preconnect" href="https://i.ytimg.com">
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#000000" />
+</head>
+<body>
+  <!-- Global Top Bar -->
+<header class="topbar topbar-compact-mobile auth-topbar-centered">
+  <div class="topbar-left">
+    <button class="home-btn" data-nav="public">🏠 Home</button>
+  </div>
+
+  <div class="topbar-center">
+    <div class="brand brand-compact brand-mobile-centered">
+<button class="brand-text brand-text-logo-only brand-lockup brand-home-link" type="button" data-nav="home" aria-label="Go to NSAAI home page">
+  <img
+    src="https://i.postimg.cc/0532b3rY/NSAAI-1-removebg-preview.png"
+    alt="NSAAI logo"
+    class="brand-title-logo"
+  />
+  <span class="brand-subtitle">National Society for African American Innovators</span>
+</button>
+    </div>
+  </div>
+
+  <div class="topbar-right topbar-actions topbar-actions-stacked">
+ <button
+  id="notifBtn"
+  class="notif-btn hidden"
+  type="button"
+  aria-label="Open notifications"
+  aria-expanded="false"
+>
+    <span class="notif-bell">🔔</span>
+    <span id="notifCount" class="notif-badge hidden">0</span>
+  </button>
+
+  <button id="themeToggle" class="chip" type="button" aria-label="Toggle theme">
+    🌙 Dark
+  </button>
+
+<nav class="auth">
+  <button id="btnToSignup" class="btn btn-outline" data-nav="signup">Sign Up</button>
+  <button id="btnToLogin" class="btn btn-primary" data-nav="login">Log In</button>
+</nav>
+</div>
+
+  </header>
+  
+  <!-- Notifications Panel -->
+<div id="notifPanel" class="notif-panel hidden" aria-hidden="true">
+  <div class="notif-panel-head">
+    <h4>Notifications</h4>
+    <button id="notifMarkRead" class="chip" type="button">Mark all read</button>
+  </div>
+
+  <div id="notifList" class="notif-list">
+    <div class="notif-empty muted small">
+  No notifications yet.
+</div>
+    </div>
+
+    <div class="notif-item unread">
+      <div class="notif-icon">🤝</div>
+      <div class="notif-copy">
+        <strong>New connection opportunity</strong>
+        <p>Jordan from Howard matched with your interests in Product and AI.</p>
+        <span class="notif-time">14m ago</span>
+      </div>
+    </div>
+
+    <div class="notif-item unread">
+      <div class="notif-icon">📅</div>
+      <div class="notif-copy">
+        <strong>Event reminder</strong>
+        <p>Innovation Study Sync starts tomorrow at 6:00 PM.</p>
+        <span class="notif-time">1h ago</span>
+      </div>
+    </div>
+
+    <div class="notif-item">
+      <div class="notif-icon">🚀</div>
+      <div class="notif-copy">
+        <strong>Your community post is gaining traction</strong>
+        <p>5 people liked your latest update in the Community feed.</p>
+        <span class="notif-time">3h ago</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Pages (client-side router) -->
+  <main id="app">
+    <!-- HOME (Landing) -->
+    <section id="page-home" class="page active">
+      <div class="card hero">
+        <h2>Innovation belongs to all of us.</h2>
+        <p class="tagline">A welcoming space for Black high school students, college students, and working professionals who are passionate about innovation, building solutions, and shaping the future.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" id="ctaStart" data-nav="signup">Get Started</button>
+          <button class="btn btn-outline" id="ctaDemo">Try the Demo</button>
+        </div>
+        <ul class="highlights">
+          <li>🌎 Meet Black innovators changing the future</li>
+          <li>🚀 Launch ideas, startups, projects, and creative ventures</li>
+          <li>🤝 Find your tribe, mentors, and collaborators</li>
+          <li>🎓 Access scholarships, internships, jobs, and career pathways</li>
+          <li>🏫 Discover campuses and programs built for innovators</li>
+          <li>💡 Use AI tools to spark ideas and sharpen your vision</li>
+	  <li>🎤 Showcase your work and grow your personal brand</li>
+	  <li>🧠 Invest in your wellness, growth, and leadership</li>
+	  <li>✊🏾 Learn from the culture. Build the future.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SIGN UP -->
+    <section id="page-signup" class="page">
+      <div class="card auth-card">
+        <h2>Create your account</h2>
+        <p class="tagline">Built for everyone—rooted in community.</p>
+        <form id="signupForm" autocomplete="off">
+          <label>Full Name <input type="text" name="name" required /></label>
+          <label>Email <input type="email" name="email" required /></label>
+          <label>Password <input type="password" name="password" required minlength="6" /></label>
+          <label>College / Org (optional) <input type="text" name="school" placeholder="e.g., NC A&T, Howard, Spelman" /></label>
+          <label>Interests (comma-separated) <input type="text" name="skills" placeholder="Product, AI, Climate, Design" /></label>
+          <button class="btn btn-primary" type="submit">Create Account</button>
+        </form>
+        <p class="muted small">Already have an account? <a href="#" data-nav="login">Log in</a></p>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="page-login" class="page">
+      <div class="card auth-card">
+        <h2>Welcome back</h2>
+        <form id="loginForm" autocomplete="off">
+          <label>Email <input type="email" name="email" required /></label>
+          <label>Password <input type="password" name="password" required /></label>
+          <button class="btn btn-primary" type="submit">Log In</button>
+        </form>
+        <div class="row" style="justify-content:space-between;margin-top:8px">
+          <a href="#" id="linkForgot">Forgot password?</a>
+          <a href="#" data-nav="signup">Create an account</a>
+        </div>
+      </div>
+      <dialog id="forgotDialog">
+        <form id="forgotForm" method="dialog" class="card" style="margin:0">
+          <h3 class="dialog-title">Reset password</h3>
+          <p class="muted small">Enter your email and we’ll send you a password reset link.</p>
+          <label>Email <input type="email" name="email" required /></label>
+          <menu>
+            <button type="button" id="forgotCancel" class="btn">Cancel</button>
+            <button value="ok" class="btn btn-primary">Send Reset Link</button>
+          </menu>
+        </form>
+      </dialog>
+    </section>
+    
+    
+    <!-- MEMBERS SIGN UP / LOGIN -->
+<section id="page-members" class="page">
+  <div class="card auth-card members-auth-card">
+    <span class="badge">NSAAI Members</span>
+    <h2>Unlock the Builder Side of NSAAI</h2>
+    <p class="tagline">
+      Members get access to Studio, Mentors, Projects, chapter opportunities, and deeper tools designed to help innovators build with confidence.
+    </p>
+
+    <div class="members-auth-grid">
+      <div class="members-auth-panel">
+        <h3>Join as a Member</h3>
+        <p class="muted small">
+          Become part of the NSAAI family and unlock the spaces where ideas become real.
+        </p>
+        <button class="btn btn-primary" type="button" data-nav="membership">
+          View Membership Options
+        </button>
+      </div>
+
+      <div class="members-auth-panel">
+        <h3>Member Log In</h3>
+        <form id="memberLoginForm" autocomplete="off">
+          <label>Email <input type="email" name="memberEmail" required /></label>
+          <label>Password <input type="password" name="memberPassword" required /></label>
+          <button class="btn btn-primary" type="submit">Log In as Member</button>
+        </form>
+      </div>
+    </div>
+
+    <p class="muted small" style="margin-top:14px">
+      Not ready yet? <a href="#" data-nav="signup">Create a free account first</a>.
+    </p>
+  </div>
+</section>
+    
+
+    <!-- DASHBOARD -->
+    <section id="page-dashboard" class="page">
+      <header class="app-header">
+        <div class="me">
+          <span id="meInitial" class="avatar">👤</span>
+          <div>
+            <strong id="meName">Your Name</strong>
+            <div id="meSchool" class="muted small"></div>
+          </div>
+        </div>
+<div class="header-actions"></div>
+      </header>
+
+      <!-- Tabs with minimize/maximize -->
+      <!-- App Shell: Side Menu + Content -->
+<div class="app-shell">
+  <!-- Mobile menu toggle -->
+  <button id="sideMenuToggle" class="side-menu-toggle chip" type="button" aria-label="Open menu">
+    ☰ Menu
+  </button>
+
+   <!-- Backdrop for mobile -->
+  <div id="sideMenuBackdrop" class="side-menu-backdrop"></div>
+
+  <!-- Desktop subtle hide/show rail -->
+  <button
+    id="sideMenuCollapseBtn"
+    class="side-menu-collapse-btn"
+    type="button"
+    aria-label="Hide menu"
+    title="Hide menu"
+  >
+    ‹
+  </button>
+
+  <!-- Side navigation -->
+  <aside id="sideMenu" class="side-menu" aria-label="Main navigation">
+    <div class="side-menu-top">
+<div class="side-profile">
+  <span id="sideMeInitial" class="avatar side-menu-avatar">👤</span>
+
+  <img
+    id="sideMePhoto"
+    class="side-menu-profile-photo hidden"
+    alt="User profile photo"
+  />
+
+  <div class="side-profile-text">
+    <strong id="sideMeName">Your Name</strong>
+    <div id="sideMeSchool" class="muted small"></div>
+  </div>
+</div>
+
+      <button id="sideMenuClose" class="chip side-menu-close" type="button" aria-label="Close menu">
+        ✕
+      </button>
+    </div>
+
+<div class="side-menu-brand side-menu-brand-compact">
+  <button class="side-menu-brand-text side-menu-home-link" type="button" data-nav="home" aria-label="Go to NSAAI home page">
+    <img
+      src="https://i.postimg.cc/0532b3rY/NSAAI-1-removebg-preview.png"
+      alt="NSAAI logo"
+      class="side-menu-brand-title-logo"
+    />
+    <div class="side-menu-brand-subtitle">National Society for African American Innovators</div>
+  </button>
+</div>
+
+<nav class="side-menu-nav">
+  <button class="side-link active" data-nav="home">🏠 Home</button>
+  <button class="side-link" data-nav="friends">👥 Network</button>
+  <button class="side-link" data-nav="feed">💬 Community</button>
+  <button class="side-link" data-nav="calendar">📅 Calendar</button>
+  <button class="side-link" data-nav="scholarships">🎓 Scholarships</button>
+  <button class="side-link" data-nav="jobs">💼 Jobs</button>
+  <button class="side-link" data-nav="campus">🗺️ Campus Locator</button>
+  <button class="side-link locked-feature-link" data-nav="studio" data-locked-feature="Studio">🔒 🧪 Studio</button>
+<button class="side-link locked-feature-link" data-nav="mentors" data-locked-feature="Mentors">🔒 🧠 Mentors</button>
+<button class="side-link locked-feature-link" data-nav="projects" data-locked-feature="Projects">🔒 🚀 Projects</button>
+  <button class="side-link" data-nav="playbook">📚 Playbook</button>
+  <button class="side-link" data-nav="wellness">🧘🏾 Wellness</button>
+  <button class="side-link" data-nav="culture">🎴 Culture</button>
+  <button class="side-link" data-nav="music">🎵 Music</button>
+  <button class="side-link" data-nav="quests">🏆 Quests</button>
+  <button class="side-link" data-nav="partners">🤝 Partners</button>
+  <button class="side-link" data-nav="socials">🔗 Socials</button>
+  <button class="side-link" data-nav="membership">💠 Membership</button>
+</nav>
+
+<div class="side-menu-actions"></div>
+  </aside>
+
+    <!-- Main content area -->
+  <div class="app-content">
+    <div class="content-topbar">
+      <button
+        id="sideMenuRevealBtn"
+        class="side-menu-reveal-btn"
+        type="button"
+        aria-label="Show menu"
+        title="Show menu"
+      >
+        ☰
+      </button>
+    </div>
+
+      <!-- Subpages -->
+      <div class="pages">
+        
+        <!-- HOME (Dashboard Default) -->
+<section id="sub-home" class="subpage active">
+  <div class="dash-home-header clean-home-header">
+  <div>
+    <h2 class="dash-page-title">Welcome to NSAAI</h2>
+    <p class="muted small">Build community, find opportunities, and create with purpose.</p>
+  </div>
+
+  <div class="row" style="gap:10px">
+    <button id="homeOpenMenuBtn" class="chip" type="button">☰ Menu</button>
+    <button id="homeProfileBtn" class="chip" data-nav="profile" type="button">👤 Profile</button>
+  </div>
+</div>
+
+  <div class="card" style="margin-top:12px">
+    <div class="pane-header" style="margin-bottom:10px">
+      <h3 style="margin:0">⭐ Featured Innovators This Week</h3>
+      <button id="btnCustomizeBottomNav" class="btn small btn-outline">Customize Bottom Bar</button>
+    </div>
+
+    <div id="featuredGrid" class="featured-grid"></div>
+    <p class="muted small" style="margin-top:10px">
+      Weekly shoutouts based on activity (MVP uses impressive mock users).
+    </p>
+  </div>
+
+  <!-- Bottom Nav Customization Dialog -->
+  <dialog id="bottomNavDialog">
+    <form id="bottomNavForm" method="dialog" class="card" style="margin:0;max-width:560px">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h3 class="dialog-title" style="margin:0">Customize Bottom Bar</h3>
+        <button type="button" id="bottomNavClose" class="chip">Close</button>
+      </div>
+
+<p class="muted small" style="margin-top:10px">
+  Home is required. Choose 4 other pages (must be 5 total). Study is hidden for now.
+</p>
+
+      <label>Slot 2
+        <select name="slot2" class="select"></select>
+      </label>
+      <label>Slot 3
+        <select name="slot3" class="select"></select>
+      </label>
+      <label>Slot 4
+        <select name="slot4" class="select"></select>
+      </label>
+      <label>Slot 5
+        <select name="slot5" class="select"></select>
+      </label>
+
+      <menu style="display:flex;gap:10px;justify-content:flex-end">
+        <button type="button" id="bottomNavReset" class="btn">Reset</button>
+        <button value="ok" class="btn btn-primary">Save</button>
+      </menu>
+    </form>
+  </dialog>
+</section>
+
+        
+        <!-- DIRECTORY -->
+        <section id="sub-friends" class="subpage">
+          <div class="pane-header">
+                <h3>Network</h3>
+            <div class="row" style="flex:1">
+              <input id="friendSearch" class="search" placeholder="Search by name, skill, school, or affinity…" />
+              <button id="friendSearchBtn" class="btn">Search</button>
+              <button id="friendRecsBtn" class="btn btn-outline">⭐ Recommendations</button>
+              <button id="friendConnectionsBtn" class="btn btn-outline">🤝 Connections</button>
+              <button id="friendMessagesBtn" class="btn btn-outline">💬 Messages</button>
+            </div>
+          </div>
+<div id="networkStatusNote" class="muted small network-status-note">
+  Search and connect with real NSAAI users. Real users will appear above demo users when available.
+</div>
+          <ul id="friendList" class="list"></ul>
+        </section>
+
+<!-- FEED / COMMUNITY -->
+<section id="sub-feed" class="subpage">
+  <!-- Community Hero Header -->
+  <div class="community-shell">
+    
+
+            <!-- Stories Row -->
+            <div class="community-stories-wrap card">
+              <div class="pane-header community-stories-header">
+                <div>
+                  <h4 class="community-section-title">Stories</h4>
+                  <p class="muted small">See what your network is doing in the last 24 hours.</p>
+                </div>
+
+                <div class="row">
+                  <button id="storiesScrollLeft" class="chip story-scroll-btn" type="button" aria-label="Scroll stories left">←</button>
+                  <button id="storiesScrollRight" class="chip story-scroll-btn" type="button" aria-label="Scroll stories right">→</button>
+                </div>
+              </div>
+
+              <div id="storiesRail" class="stories-rail" aria-label="Community stories">
+                <!-- Add Story Card -->
+                <button id="addStoryCard" class="story-card add-story-card" type="button" aria-label="Add a story">
+                  <div class="story-ring add-story-ring">
+                    <div class="story-avatar add-story-avatar">＋</div>
+                  </div>
+                  <div class="story-name">Your Story</div>
+                </button>
+
+<div id="realUserStoriesSlot" class="real-user-stories-slot"></div>
+
+                <!-- Demo / seeded stories -->
+                <button class="story-card live-story" type="button" data-story-user="Jordan Miles">
+                  <div class="story-ring">
+                    <div class="story-avatar">
+                      <img src="https://i.pravatar.cc/100?img=12" alt="Jordan Miles story" />
+                    </div>
+                  </div>
+                  <div class="story-name">Jordan</div>
+                </button>
+
+                <button class="story-card live-story" type="button" data-story-user="Amara Cole">
+                  <div class="story-ring">
+                    <div class="story-avatar">
+                      <img src="https://i.pravatar.cc/100?img=32" alt="Amara Cole story" />
+                    </div>
+                  </div>
+                  <div class="story-name">Amara</div>
+                </button>
+
+                <button class="story-card live-story" type="button" data-story-user="Malik Johnson">
+                  <div class="story-ring">
+                    <div class="story-avatar">
+                      <img src="https://i.pravatar.cc/100?img=15" alt="Malik Johnson story" />
+                    </div>
+                  </div>
+                  <div class="story-name">Malik</div>
+                </button>
+
+                <button class="story-card live-story" type="button" data-story-user="Nia Brooks">
+                  <div class="story-ring">
+                    <div class="story-avatar">
+                      <img src="https://i.pravatar.cc/100?img=47" alt="Nia Brooks story" />
+                    </div>
+                  </div>
+                  <div class="story-name">Nia</div>
+                </button>
+
+                <button class="story-card live-story" type="button" data-story-user="Evan Ross">
+                  <div class="story-ring">
+                    <div class="story-avatar">
+                      <img src="https://i.pravatar.cc/100?img=61" alt="Evan Ross story" />
+                    </div>
+                  </div>
+                  <div class="story-name">Evan</div>
+                </button>
+
+                <button class="story-card live-story" type="button" data-story-user="Zora Fields">
+                  <div class="story-ring">
+                    <div class="story-avatar">
+                      <img src="https://i.pravatar.cc/100?img=5" alt="Zora Fields story" />
+                    </div>
+                  </div>
+                  <div class="story-name">Zora</div>
+                </button>
+
+                <button class="story-card live-story" type="button" data-story-user="Chris Bennett">
+                  <div class="story-ring">
+                    <div class="story-avatar">
+                      <img src="https://i.pravatar.cc/100?img=20" alt="Chris Bennett story" />
+                    </div>
+                  </div>
+                  <div class="story-name">Chris</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Feed Header / Filters -->
+            <div class="community-feed-topbar">
+              <div class="community-feed-title-wrap">
+                <h4 class="community-section-title">Community Feed</h4>
+                <p class="muted small">A professional but energetic space to post ideas, wins, opportunities, and conversations.</p>
+              </div>
+
+              <div class="community-feed-controls">
+ <select id="feedFilter" class="select">
+  <option value="all">All Posts</option>
+  <option value="campus">My Campus</option>
+  <option value="area">My Area</option>
+</select>
+
+                <select id="feedSort" class="select">
+                  <option value="latest">Latest</option>
+                  <option value="popular">Popular</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Main Community Layout -->
+            <div class="community-layout">
+              <!-- Left / Main Feed Column -->
+              <div class="community-main">
+                <!-- Composer -->
+                <form id="composer" class="composer community-composer">
+                  <div class="community-composer-top">
+                    <div class="community-composer-avatar">
+                      <span id="communityComposerAvatar" class="avatar">👤</span>
+                    </div>
+
+                    <button id="fakeComposerTrigger" class="composer-trigger" type="button">
+                      Share an update, breakthrough, idea, opportunity, or win…
+                    </button>
+                  </div>
+
+                  <div class="community-composer-fields">
+                    <textarea id="postText" rows="4" placeholder="What are you building, learning, or looking for right now?"></textarea>
+
+                    <div class="community-composer-grid">
+                      <input type="url" id="postLink" placeholder="Add a link (optional)" />
+                      <input type="file" id="postMedia" accept="image/*,video/*" />
+                    </div>
+
+                    <div class="community-composer-bottom">
+                      <div class="community-composer-tools">
+                        <button id="attachImageBtn" class="chip" type="button">🖼 Photo</button>
+                        <button id="attachVideoBtn" class="chip" type="button">🎥 Video</button>
+                        <button id="attachStoryBtn" class="chip" type="button">⚡ Story</button>
+                      </div>
+
+                      <div class="community-composer-actions">
+ <select id="postAudience" class="select">
+  <option value="all">Everyone</option>
+  <option value="campus">Campus Only</option>
+  <option value="area">Area Only</option>
+</select>
+                        <button class="btn btn-primary" type="submit">Post</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                <!-- Feed -->
+<div id="realUserFeedNotice" class="muted small real-user-feed-notice hidden">
+  Showing real NSAAI user posts first, followed by demo community posts.
+</div>
+                <ul id="feedList" class="feed community-feed-list"></ul>
+              </div>
+
+              <!-- Right / Sidebar -->
+              <aside class="community-side">
+                <div class="card community-side-card">
+                  <h4>Trending in NSAAI</h4>
+                  <ul class="community-trending-list">
+                    <li>#BlackInnovation</li>
+                    <li>#PitchYourIdea</li>
+                    <li>#CampusBuilders</li>
+                    <li>#InternshipWins</li>
+                    <li>#FounderJourney</li>
+                  </ul>
+                </div>
+
+                <div class="card community-side-card">
+                  <h4>Post Ideas</h4>
+                  <p class="muted small">Need inspiration? Try posting:</p>
+                  <ul class="community-prompt-list">
+                    <li>A project update</li>
+                    <li>A scholarship or internship opportunity</li>
+                    <li>A collaboration request</li>
+                    <li>A lesson you learned this week</li>
+                    <li>A recent win worth celebrating</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </div>
+
+          <!-- Story Dialog -->
+          <dialog id="storyDialog">
+            <form id="storyForm" method="dialog" class="card story-dialog-card" style="margin:0;max-width:560px">
+              <div class="row" style="justify-content:space-between;align-items:center">
+                <h3 class="dialog-title" style="margin:0">Post a Story</h3>
+                <button type="button" id="storyCancel" class="chip">Close</button>
+              </div>
+
+              <p class="muted small" style="margin-top:10px">
+                Stories stay visible for 24 hours and are perfect for quick updates, behind-the-scenes moments, and creative energy.
+              </p>
+
+              <label>Story Caption
+                <input id="storyCaption" name="storyCaption" type="text" maxlength="120" placeholder="What’s happening right now?" />
+              </label>
+
+              <label>Upload Image or Video
+                <input id="storyMedia" name="storyMedia" type="file" accept="image/*,video/*" />
+              </label>
+
+              <menu style="display:flex;gap:10px;justify-content:flex-end">
+                <button type="button" id="storyCloseBtn" class="btn">Cancel</button>
+                <button value="ok" class="btn btn-primary">Share Story</button>
+              </menu>
+            </form>
+          </dialog>
+  <dialog id="storyViewDialog">
+  <div class="card story-view-card" style="margin:0;max-width:520px">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <h3 id="storyViewUser" class="dialog-title" style="margin:0">Story</h3>
+      <button id="storyViewClose" class="chip" type="button">Close</button>
+    </div>
+
+    <div id="storyViewMedia" style="margin-top:12px"></div>
+    <p id="storyViewCaption" class="muted" style="margin-top:12px"></p>
+    <div id="storyViewTime" class="muted small"></div>
+  </div>
+</dialog>
+        </section>
+
+     <!-- CALENDAR -->
+<section id="sub-calendar" class="subpage">
+  <div class="pane-header calendar-pane-header">
+    <div>
+      <h3>Study Groups & Events</h3>
+      <p class="muted small">View upcoming events, switch to a visual calendar, and add new items easily.</p>
+    </div>
+
+    <div class="calendar-header-actions">
+      <button id="btnOpenVisualCalendar" class="chip calendar-open-btn" type="button">🗓 Calendar</button>
+      <button id="btnCreateEvent" class="chip" type="button">+ New</button>
+    </div>
+  </div>
+
+  <!-- Optional summary cards above the list -->
+  <div class="calendar-summary-grid">
+    <div class="card calendar-summary-card">
+      <div class="calendar-summary-label muted small">This Month</div>
+      <div id="calendarMonthCount" class="calendar-summary-value">0 Events</div>
+    </div>
+
+    <div class="card calendar-summary-card">
+      <div class="calendar-summary-label muted small">Next Up</div>
+      <div id="calendarNextUp" class="calendar-summary-value">No upcoming event</div>
+    </div>
+  </div>
+
+  <!-- Existing event list stays -->
+  <ul id="eventList" class="list"></ul>
+
+  <!-- Create Event Dialog -->
+<dialog id="eventDialog">
+  <form id="eventForm" method="dialog" class="card" style="margin:0">
+    <h4 class="dialog-title">Create Event</h4>
+
+    <label>Title <input name="title" required /></label>
+    <label>Date & Time <input name="datetime" type="datetime-local" required /></label>
+    <label>Location <input name="location" placeholder="Room 204, Library, Zoom…" required /></label>
+    <label>Host <input name="host" placeholder="Your name or org" required /></label>
+    <label>Description <textarea name="desc" rows="3"></textarea></label>
+
+    <div class="event-visibility-field">
+      <div class="event-visibility-label">
+        <strong>Event Visibility</strong>
+        <span class="muted small">Choose who can see this event.</span>
+      </div>
+
+      <div class="event-visibility-toggle" role="group" aria-label="Event visibility">
+        <label class="visibility-option">
+          <input type="radio" name="visibility" value="private" checked />
+          <span>🔒 Private</span>
+        </label>
+
+        <label class="visibility-option">
+          <input type="radio" name="visibility" value="public" />
+          <span>🌎 Public</span>
+        </label>
+      </div>
+
+      <p class="muted small event-visibility-help">
+        Private events are only visible to you. Public events are visible to people in your NSAAI network.
+      </p>
+    </div>
+
+    <menu>
+      <button type="button" id="eventCancel" class="btn">Cancel</button>
+      <button value="ok" class="btn btn-primary">Save</button>
+    </menu>
+  </form>
+</dialog>
+
+  <!-- NEW: Visual Calendar Dialog -->
+  <dialog id="calendarViewDialog">
+    <div class="card calendar-dialog-card" style="margin:0;max-width:1100px">
+      <div class="calendar-dialog-top">
+        <div>
+          <h3 class="dialog-title" style="margin:0">Your Calendar</h3>
+          <p class="muted small" style="margin-top:6px">
+            See your schedule visually and click any day to add something new.
+          </p>
+        </div>
+
+        <div class="calendar-dialog-actions">
+          <button id="calendarJumpToday" class="chip" type="button">Today</button>
+          <button id="calendarDialogClose" class="chip" type="button">Close</button>
+        </div>
+      </div>
+
+      <!-- top controls -->
+      <div class="calendar-toolbar">
+        <div class="calendar-nav-group">
+          <button id="calendarPrevMonth" class="chip" type="button" aria-label="Previous month">←</button>
+          <div id="calendarCurrentLabel" class="calendar-current-label">April 2026</div>
+          <button id="calendarNextMonth" class="chip" type="button" aria-label="Next month">→</button>
+        </div>
+
+        <div class="calendar-view-switch">
+          <button id="calendarMonthViewBtn" class="chip active" type="button">Month</button>
+          <button id="calendarYearViewBtn" class="chip" type="button">Year</button>
+        </div>
+      </div>
+
+      <!-- Month view -->
+      <div id="calendarMonthView" class="calendar-visual-wrap">
+        <div class="calendar-weekdays">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+
+        <div id="calendarGrid" class="calendar-grid">
+          <!-- JS will inject calendar days here -->
+        </div>
+      </div>
+
+      <!-- Year view -->
+      <div id="calendarYearView" class="calendar-year-wrap hidden">
+        <div id="calendarYearGrid" class="calendar-year-grid">
+          <!-- JS will inject 12 mini months here -->
+        </div>
+      </div>
+
+      <!-- selected day details -->
+      <div class="calendar-day-panel">
+        <div class="calendar-day-panel-top">
+          <div>
+            <h4 id="calendarSelectedDateLabel" style="margin:0">Selected Day</h4>
+            <p class="muted small" style="margin-top:4px">See what is scheduled and add something quickly.</p>
+          </div>
+
+          <button id="calendarAddFromDay" class="btn btn-primary" type="button">+ Add to This Day</button>
+        </div>
+
+        <div id="calendarSelectedEvents" class="calendar-selected-events">
+          <div class="muted small">No events for this day yet.</div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<!-- SCHOLARSHIPS -->
+<section id="sub-scholarships" class="subpage">
+  <div class="pane-header scholarships-pane-header">
+    <div>
+      <h3>Scholarships</h3>
+      <p class="muted small">
+        Explore 100 scholarships created to help Black innovators, builders, students, creators, and future leaders fund their education, expand their opportunities, and keep building the future with confidence.
+      </p>
+    </div>
+
+    <input
+      id="schSearch"
+      class="search"
+      placeholder="Search by topic, amount, org…"
+    />
+  </div>
+
+  <div id="schModeNote" class="muted small scholarship-mode-note">
+    Showing all 100 scholarships for Black innovators.
+  </div>
+
+  <ul id="schList" class="list scholarships-list-enhanced"></ul>
+</section>
+
+<!-- JOBS -->
+<section id="sub-jobs" class="subpage">
+  <div class="pane-header jobs-pane-header">
+    <div>
+      <h3>Internships & Jobs</h3>
+      <p class="muted small">
+        Explore 100 high-value internships, fellowships, early-career jobs, and career programs for Black innovators across tech, business, media, government, STEM, finance, design, and social impact.
+      </p>
+    </div>
+
+    <div class="jobs-search-actions">
+      <button id="jobSavedBtn" class="btn btn-outline job-saved-btn hidden" type="button">
+        💾 Saved
+      </button>
+
+      <input
+        id="jobSearch"
+        class="search"
+        placeholder="Search role, company, location, type, or focus…"
+      />
+    </div>
+  </div>
+
+  <div id="jobModeNote" class="muted small job-mode-note">
+    Showing all 100 internships and jobs.
+  </div>
+
+  <ul id="jobList" class="list jobs-list-enhanced"></ul>
+</section>
+
+<!-- CAMPUS LOCATOR -->
+<section id="sub-campus" class="subpage">
+  <div class="pane-header campus-pane-header">
+    <div>
+      <h3>Campus Innovation Locator</h3>
+      <p class="muted small">
+        Explore 100 campuses with entrepreneurship centers, innovation hubs, accelerators, makerspaces, and programs valuable to Black innovators.
+      </p>
+    </div>
+
+    <div class="campus-search-actions">
+      <button id="campusFavoritesBtn" class="btn btn-outline campus-favorites-btn hidden" type="button">
+        ⭐ Favorites
+      </button>
+
+      <input
+        id="campusSearch"
+        class="search"
+        placeholder="Search campus, state, program, or focus…"
+      />
+    </div>
+  </div>
+
+  <div id="campusModeNote" class="muted small campus-mode-note">
+    Showing all 100 innovation prospecting campuses.
+  </div>
+
+  <ul id="campusList" class="list campus-list-enhanced"></ul>
+</section>
+
+<!-- STUDIO -->
+<section id="sub-studio" class="subpage">
+  <div class="studio-page studio-chatgpt-page">
+    <div class="studio-main-layout studio-main-layout-chatgpt">
+      <!-- Left Sidebar -->
+      <aside class="studio-sidebar studio-sidebar-chatgpt card">
+        <div class="studio-sidebar-top">
+          <button id="btnStudioNewChatSide" class="btn btn-primary studio-new-chat-btn" type="button">
+            + New Chat
+          </button>
+        </div>
+
+        <div class="studio-sidebar-search">
+          <input
+            id="studioChatSearch"
+            class="search"
+            type="text"
+            placeholder="Search chats..."
+          />
+        </div>
+
+        <div id="studioChatList" class="studio-chat-list">
+          <!-- JS will inject saved chat threads here -->
+        </div>
+      </aside>
+      
+      <div id="studioSidebarBackdrop" class="studio-sidebar-backdrop"></div>
+
+      <!-- Main Chat -->
+      <section class="studio-chat-panel studio-chat-panel-chatgpt">
+        <!-- Top bar -->
+<div class="studio-chat-topbar studio-chat-topbar-chatgpt">
+  <div class="studio-chat-topbar-left">
+    <button id="btnStudioSidebarToggle" class="studio-sidebar-toggle chip" type="button" aria-label="Toggle chats">
+      ☰
+    </button>
+
+    <div class="studio-chat-title-wrap">
+      <h4 id="studioActiveChatTitle" class="studio-chat-title">Innovator Chat</h4>
+    </div>
+  </div>
+
+  <div class="studio-chat-top-actions">
+    <button id="btnRenameStudioChat" class="chip" type="button">✏️ Rename</button>
+    <button id="btnDeleteStudioChat" class="chip danger" type="button">🗑 Delete</button>
+  </div>
+</div>
+
+        <!-- Empty / first screen -->
+        <div id="studioWelcomeBox" class="studio-welcome-box studio-welcome-box-chatgpt">
+          <h2 class="studio-main-question">What can I help you innovate?</h2><p class="studio-source-note">✊🏾 Inspired by Black innovators and their documented work. Explore original sources and build what comes next.</p>
+
+          <div class="studio-suggestion-grid studio-suggestion-grid-chatgpt">
+            <button
+              class="studio-suggestion-card"
+              type="button"
+              data-studio-prompt="Help me come up with an innovative app idea that solves a real problem for students"
+            >
+              Help me create an app idea
+            </button>
+
+            <button
+              class="studio-suggestion-card"
+              type="button"
+              data-studio-prompt="Give me 5 innovative invention ideas that solve real everyday problems"
+            >
+              Give me invention ideas
+            </button>
+
+            <button
+              class="studio-suggestion-card"
+              type="button"
+              data-studio-prompt="Help me improve my pitch and ask me follow-up questions so I can make it stronger"
+            >
+              Improve my pitch
+            </button>
+
+            <button
+              class="studio-suggestion-card"
+              type="button"
+              data-studio-prompt="Help me turn my rough idea into a business concept and next-step plan"
+            >
+              Turn my idea into a business
+            </button>
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div id="studioMessages" class="studio-messages studio-messages-chatgpt" aria-live="polite">
+          <!-- JS injects messages here -->
+        </div>
+
+        <!-- Input -->
+        <form id="studioForm" class="studio-input-wrap studio-input-wrap-chatgpt" autocomplete="off">
+          <div class="studio-input-shell studio-input-shell-chatgpt">
+            <button id="btnStudioPromptIdeas" class="studio-plus-btn" type="button" aria-label="Show prompt ideas">
+              ＋
+            </button>
+
+            <textarea
+              id="studioInput"
+              rows="1"
+              placeholder="Ask anything"
+            ></textarea>
+
+            <button id="btnStudioSend" class="studio-send-btn" type="submit" aria-label="Send message">
+              ↑
+            </button>
+          </div>
+
+          <div class="studio-input-footer">
+            <div class="muted small">
+              Gemini-powered conversations • Black innovator source references • Chat history stored in this browser
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <!-- Studio Tools Section -->
+    <div class="studio-tools-wrap">
+      <div class="pane-header studio-tools-header">
+        <div>
+          <h3>Studio Tools</h3>
+          <p class="muted small">Extra creative tools to help you generate, refine, and collaborate.</p>
+        </div>
+      </div>
+
+      <div class="studio-grid">
+        <div class="card">
+          <h4>🎲 Idea Roulette 2.0</h4>
+          <p class="muted small">Culture-aware prompts that turn into pitch-ready ideas.</p>
+          <div class="row">
+            <button id="btnRoulette" class="btn btn-primary">Spin</button>
+            <button id="btnRouletteRemix" class="btn">Remix</button>
+            <button id="btnRouletteToFeed" class="btn">Post to Feed</button>
+          </div>
+          <textarea id="rouletteOut" rows="5" placeholder="Your idea will appear here…"></textarea>
+          <h5>60-sec Pitch Template</h5>
+          <textarea id="pitchTemplate" rows="6" placeholder="Problem — Solution — Who for — Why now — Traction — Ask"></textarea>
+        </div>
+
+        <div class="card">
+          <h4>🎤 Pitch Coach (60-sec)</h4>
+          <textarea id="pitchInput" rows="7" placeholder="Paste, type, or speak your pitch here…"></textarea>
+
+          <div class="row" style="margin-top:8px">
+            <button id="btnPitchVoice" class="btn">🎙️ Speak Pitch</button>
+            <button id="btnScorePitch" class="btn btn-primary">Score my Pitch</button>
+          </div>
+
+          <div id="pitchVoiceStatus" class="muted small" style="margin-top:6px"></div>
+          <div id="pitchScore" class="score"></div>
+        </div>
+
+        <div class="card">
+          <h4>🧪 Collab Chemistry</h4>
+          <div class="row">
+            <select id="chemA" class="select"></select>
+            <select id="chemB" class="select"></select>
+            <button id="btnChemistry" class="btn">Check Fit</button>
+          </div>
+          <div id="chemResult" class="muted"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTORS -->
+<section id="sub-mentors" class="subpage">
+  <div class="pane-header mentor-header">
+    <div>
+      <h3>Mentor Match</h3>
+      <p class="muted small">Find mentors whose time, expertise, and availability align with what you need most.</p>
+    </div>
+
+    <div class="mentor-header-actions">
+      <button id="btnBecomeMentor" class="btn btn-primary" type="button">
+        Become a Mentor
+      </button>
+    </div>
+  </div>
+
+  <div class="row" style="margin:0 18px 10px;flex-wrap:wrap">
+    <input id="mentorSearch" class="search" placeholder="Search by name, focus, or industry…" />
+    <select id="mentorFilter" class="select">
+      <option value="all">All focus areas</option>
+      <option value="startup">Startups & Founders</option>
+      <option value="media">Media & Content</option>
+      <option value="tech">Tech & Engineering</option>
+      <option value="career">Career & Leadership</option>
+    </select>
+  </div>
+
+  <!-- NEW: mentor availability message -->
+  <div class="mentor-capacity-intro card">
+    <div class="mentor-capacity-intro-copy">
+      <h4 style="margin:0">Mentor availability matters</h4>
+      <p class="muted small" style="margin-top:6px">
+        Each mentor shows how many mentees they are currently willing to take on so users can respect their time and connect intentionally.
+      </p>
+    </div>
+
+    <div class="mentor-capacity-legend">
+      <span class="mentor-capacity-pill open">Open Spots</span>
+      <span class="mentor-capacity-pill limited">Limited</span>
+      <span class="mentor-capacity-pill full">Full</span>
+    </div>
+  </div>
+
+  <!-- JS renders mentor cards here -->
+  <ul id="mentorList" class="list mentor-list-enhanced"></ul>
+</section>
+
+        <!-- PROJECTS -->
+        <section id="sub-projects" class="subpage">
+          <div class="pane-header">
+                <h3>Projects — Build in Public</h3>
+            <button id="btnNewProject" class="chip">+ Add Project</button>
+          </div>
+   <p class="muted small" style="margin:0 18px 10px">
+  Share what you're building, what you need, and find collaborators — while learning how to protect your ideas and join teams the right way.
+</p>
+
+<div class="card project-protection-card">
+  <div class="pane-header" style="padding:0;margin-bottom:10px">
+    <div>
+      <h4 style="margin:0">🛡️ Build Smart. Protect the Vision.</h4>
+      <p class="muted small" style="margin-top:6px">
+        Before joining a project or sharing sensitive details, innovators should understand expectations, ownership, credit, and confidentiality.
+      </p>
+    </div>
+  </div>
+
+  <div class="project-protection-grid">
+    <div>
+      <strong>1. Define the idea</strong>
+      <p class="muted small">Write a simple summary of the problem, solution, audience, and current stage.</p>
+    </div>
+
+    <div>
+      <strong>2. Clarify ownership</strong>
+      <p class="muted small">Decide who owns the original idea, who contributes, and how future credit will work.</p>
+    </div>
+
+    <div>
+      <strong>3. Use agreements when needed</strong>
+      <p class="muted small">For serious projects, consider NDAs, founder agreements, contributor agreements, or written collaboration terms.</p>
+    </div>
+
+    <div>
+      <strong>4. Track contributions</strong>
+      <p class="muted small">Keep notes on who designed, coded, researched, funded, promoted, or developed key parts.</p>
+    </div>
+
+    <div>
+      <strong>5. Protect before pitching</strong>
+      <p class="muted small">Avoid revealing secret sauce publicly until you understand patents, copyrights, trademarks, or trade secrets.</p>
+    </div>
+
+    <div>
+      <strong>6. Join teams intentionally</strong>
+      <p class="muted small">Know your role, time commitment, expectations, and what happens if someone leaves the project.</p>
+    </div>
+  </div>
+</div>
+          <div class="row" style="margin:0 18px 10px">
+            <input id="projectSearch" class="search" placeholder="Search by project, campus, or tags…" />
+            <select id="projectFilter" class="select">
+              <option value="all">All stages</option>
+              <option value="idea">Idea</option>
+              <option value="prototype">Prototype</option>
+              <option value="launch">Launched</option>
+            </select>
+          </div>
+          <ul id="projectList" class="list"></ul>
+
+          <dialog id="projectDialog">
+            <form id="projectForm" method="dialog" class="card" style="margin:0;max-width:620px">
+              <h4 class="dialog-title">Add Project</h4>
+              <label>Project Name <input name="name" required /></label>
+              <label>Campus <input name="campus" placeholder="e.g., North Carolina A&T" required /></label>
+              <label>Stage
+                <select name="stage" required>
+                  <option value="idea">Idea</option>
+                  <option value="prototype">Prototype</option>
+                  <option value="launch">Launched</option>
+                </select>
+              </label>
+              <label>Focus Area / Tags <input name="tags" placeholder="AI, Media, Wellness, FinTech…" /></label>
+              <label>What you're building <textarea name="desc" rows="3" required></textarea></label>
+              <label>What you need (optional) <textarea name="needs" rows="2" placeholder="Designer, videographer, mentor, small grant…"></textarea></label>
+              
+              <label>Team Roles Needed
+  <input name="roles" placeholder="Co-founder, developer, designer, marketer, researcher…" />
+</label>
+
+<label>Idea Protection Notes
+  <textarea name="protection" rows="3" placeholder="What should collaborators understand about ownership, credit, confidentiality, or next steps?"></textarea>
+</label>
+
+<label>Collaboration Expectations
+  <textarea name="expectations" rows="3" placeholder="Time commitment, communication style, meeting schedule, decision-making, etc."></textarea>
+</label>
+              
+              <menu>
+                <button type="button" id="projCancel" class="btn">Cancel</button>
+                <button value="ok" class="btn btn-primary">Save Project</button>
+              </menu>
+            </form>
+          </dialog>
+        </section>
+
+        <!-- PLAYBOOK -->
+        <section id="sub-playbook" class="subpage">
+          <div class="pane-header">
+            <h3>Playbook — Quick Guides for Builders</h3>
+            <div class="row" style="flex:1">
+              <input id="playSearch" class="search" placeholder="Search by topic (LLC, pitch, IP…)" />
+              <button id="btnRandomGuide" class="btn">🎲 Surprise Me</button>
+            </div>
+          </div>
+          <div class="row playbook-layout">
+            <ul id="playList" class="list" style="flex:1;min-width:260px"></ul>
+            <div id="playDetail" class="card play-detail">
+              <h4>Pick a guide to see details</h4>
+              <p class="muted small">
+                Bite-sized, no-fluff breakdowns written for Black student innovators navigating campus and real life at the same time.
+              </p>
+            </div>
+          </div>
+        </section>
+        
+        
+                <!-- MEMBERSHIP -->
+  <section id="sub-membership" class="subpage">
+  <div class="membership-page">
+
+    <div class="membership-page-top">
+      <button id="btnMembersPortalTop" class="btn btn-primary" type="button" data-nav="members">
+        💠 Members Portal
+      </button>
+    </div>
+
+    <div class="card membership-hero">
+              <div class="membership-hero-copy">
+                <span class="badge">Official NSAAI Membership</span>
+                <h3>Become a Member. Build the Future. Start the Chapter.</h3>
+                <p class="muted">
+                  An annual membership with NSAAI provides you with the tools necessary to excel in your academic development, career advancement, or professional network. Members are part of NSAAI’s extended family, and that means access to valuable resources, meaningful connections, useful data, and the latest information in innovation—all in one place.
+                </p>
+                <p class="muted">
+                  NSAAI is devoted to being the conduit between your vision and your executed goals of becoming the innovator of the century.
+                </p>
+              </div>
+
+              <div class="membership-hero-points">
+                <div class="membership-mini-stat">
+                  <strong>3 Membership Paths</strong>
+                  <span>High School • College • Professional</span>
+                </div>
+                <div class="membership-mini-stat">
+                  <strong>Chapter Access</strong>
+                  <span>You must be a member to start or join an official NSAAI chapter</span>
+                </div>
+                <div class="membership-mini-stat">
+                  <strong>Real Benefits</strong>
+                  <span>Resources • Live Events • Leadership Access • Community</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card membership-unlocks-card">
+  <span class="badge">Member Unlocks</span>
+  <h4>Unlock the tools that help innovators move from idea to action.</h4>
+
+  <div class="membership-unlocks-grid">
+    <div class="membership-unlock-item">
+      <strong>🔓 Studio</strong>
+      <p class="muted small">
+        Get access to creative tools that help you shape ideas, improve pitches, brainstorm solutions, and think like a builder.
+      </p>
+    </div>
+
+    <div class="membership-unlock-item">
+      <strong>🔓 Mentors</strong>
+      <p class="muted small">
+        Connect with experienced professionals, founders, creators, and leaders who can guide your next step.
+      </p>
+    </div>
+
+    <div class="membership-unlock-item">
+      <strong>🔓 Projects</strong>
+      <p class="muted small">
+        Join or create innovation teams, protect your ideas, find collaborators, and build real solutions with structure.
+      </p>
+    </div>
+  </div>
+</div>
+
+            <div class="membership-note card">
+              <h4>Why Membership Matters</h4>
+              <p class="muted small">
+                To start or join an official NSAAI chapter, you must become an active NSAAI member. If you want to start a chapter, NSAAI will provide you with the information, structure, and guidance needed to grow, organize, and build an effective chapter that can truly make impact.
+              </p>
+              <p class="muted small">
+                Members will also be able to attend live events, gain access to helpful resources, and connect directly with NSAAI leadership.
+              </p>
+            </div>
+
+            <div class="membership-grid">
+              <!-- High School -->
+              <article class="card membership-card membership-card-highschool">
+                <div class="membership-tier-top">
+                  <span class="membership-icon">🎓</span>
+                  <div>
+                    <h4>High School Membership</h4>
+                    <p class="muted small">For future innovators starting early</p>
+                  </div>
+                </div>
+
+                <div class="membership-price">$30 <span>/ 12 months</span></div>
+
+                <p class="membership-summary muted">
+                  Start building your innovation journey now. This membership is designed to help high school students discover their gifts, grow in confidence, explore ideas, and connect with a larger community of creators and future leaders.
+                </p>
+
+                <ul class="membership-benefits">
+                  <li>Access to NSAAI resources and innovation guidance</li>
+                  <li>Exposure to academic and creative development tools</li>
+                  <li>Opportunities to connect with peers and mentors</li>
+                  <li>Access to live events and the larger NSAAI community</li>
+                  <li>Eligibility to start or join an official NSAAI chapter</li>
+                </ul>
+
+                <div class="membership-chapter-note">
+                  To start or join an official NSAAI chapter, you must become a member.
+                </div>
+
+                <div class="membership-actions">
+                  <button class="btn btn-primary membership-pay-btn" type="button" data-membership="highschool">
+                    Join High School Membership
+                  </button>
+                </div>
+              </article>
+
+              <!-- College -->
+              <article class="card membership-card membership-card-college featured-membership">
+                <div class="membership-featured-tag">Most Popular</div>
+
+                <div class="membership-tier-top">
+                  <span class="membership-icon">🏫</span>
+                  <div>
+                    <h4>College Membership</h4>
+                    <p class="muted small">For builders, leaders, and chapter creators</p>
+                  </div>
+                </div>
+
+                <div class="membership-price">$50 <span>/ 12 months</span></div>
+
+                <p class="membership-summary muted">
+                  This membership is built for college students who want to lead, grow, connect, and create. Whether you want to find your people, build your network, launch ideas, or organize a chapter on campus, this membership helps you move with purpose.
+                </p>
+
+                <ul class="membership-benefits">
+                  <li>Access to innovation resources, tools, and opportunities</li>
+                  <li>Career development and community-building support</li>
+                  <li>Networking with students, mentors, and professionals</li>
+                  <li>Access to live events and NSAAI leadership connections</li>
+                  <li>Eligibility to start or join an official NSAAI chapter</li>
+                </ul>
+
+                <div class="membership-chapter-note">
+                  To start or join an official NSAAI chapter, you must become a member.
+                </div>
+
+                <div class="membership-actions">
+                  <button class="btn btn-primary membership-pay-btn" type="button" data-membership="college">
+                    Join College Membership
+                  </button>
+                </div>
+              </article>
+
+              <!-- Professional -->
+              <article class="card membership-card membership-card-professional">
+                <div class="membership-tier-top">
+                  <span class="membership-icon">💼</span>
+                  <div>
+                    <h4>Professional Membership</h4>
+                    <p class="muted small">For career growth, influence, and leadership</p>
+                  </div>
+                </div>
+
+                <div class="membership-price">$70 <span>/ 12 months</span></div>
+
+                <p class="membership-summary muted">
+                  Designed for working professionals, founders, engineers, creators, and leaders who want to stay connected to a powerful innovation ecosystem. Grow your network, support the next generation, attend live experiences, and help shape the future of NSAAI.
+                </p>
+
+                <ul class="membership-benefits">
+                  <li>Professional network growth and leadership access</li>
+                  <li>Access to NSAAI resources, updates, and community insights</li>
+                  <li>Connection to live events and member opportunities</li>
+                  <li>Direct access to engage with NSAAI leadership</li>
+                  <li>Eligibility to start or join an official NSAAI chapter</li>
+                </ul>
+
+                <div class="membership-chapter-note">
+                  To start or join an official NSAAI chapter, you must become a member.
+                </div>
+
+                <div class="membership-actions">
+                  <button class="btn btn-primary membership-pay-btn" type="button" data-membership="professional">
+                    Join Professional Membership
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <div class="card membership-bottom-message">
+              <h4>Membership is more than access.</h4>
+              <p class="muted">
+                It is a commitment to growth, collaboration, innovation, and community. When you join NSAAI, you are not just signing up—you are stepping into a family that wants to see you build, lead, and thrive.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        
+     <!-- STUDY -->
+<section id="sub-study" class="subpage">
+  <div class="pane-header study-page-header">
+    <div>
+      <h3>Study Binder</h3>
+      <p class="muted small study-subtext">Create subjects, write notes, and review everything easily on mobile.</p>
+    </div>
+
+    <div class="row study-top-actions">
+      <button id="btnNewSubject" class="chip" type="button">+ Subject</button>
+      <button id="btnNewNote" class="chip" type="button">+ Note</button>
+    </div>
+  </div>
+
+  <div class="study-shell">
+    <!-- Mobile / Tablet top controls -->
+    <div class="study-mobile-bar">
+      <button id="btnToggleStudySidebar" class="chip" type="button" aria-expanded="false" aria-controls="studySidebar">
+        ☰ Subjects & Notes
+      </button>
+    </div>
+
+    <!-- Left: Subject + Notes list -->
+    <aside id="studySidebar" class="study-sidebar" aria-label="Subjects and Notes">
+      <div class="study-sidebar-inner">
+        <div class="study-search">
+          <input id="studySearch" class="search" placeholder="Search subjects or notes…" />
+        </div>
+
+        <div class="study-lists">
+          <div class="study-panel">
+            <div class="study-panel-title">Subjects</div>
+            <ul id="subjectList" class="list study-list"></ul>
+          </div>
+
+          <div class="study-panel">
+            <div class="study-panel-title">Notes</div>
+            <ul id="noteList" class="list study-list"></ul>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right: Editor -->
+    <section class="study-editor" aria-label="Note editor">
+      <div class="study-editor-card">
+        <div class="study-editor-top">
+          <div class="study-editor-meta study-subject-meta">
+            <label for="studySubjectSelect" class="muted small">Subject</label>
+            <select id="studySubjectSelect" class="select"></select>
+          </div>
+
+          <div class="study-editor-meta grow study-title-meta">
+            <div class="study-note-title-row">
+              <label for="noteTitle" class="muted small">Note Title</label>
+              <div id="activeSubjectPill" class="subject-pill" aria-label="Selected subject"></div>
+            </div>
+
+            <input
+              id="noteTitle"
+              class="search study-note-title-input"
+              placeholder="e.g., Chapter 4 — Photosynthesis"
+            />
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="study-toolbar-wrap">
+          <div class="study-toolbar" role="toolbar" aria-label="Editor toolbar">
+            <button id="btnBullet" class="chip" type="button" title="Bullet points">• List</button>
+            <button id="btnIndent" class="chip" type="button" title="Indent">↳</button>
+            <button id="btnOutdent" class="chip" type="button" title="Outdent">↰</button>
+            <button id="btnBold" class="chip" type="button" title="Bold"><b>B</b></button>
+            <button id="btnItalic" class="chip" type="button" title="Italic"><i>I</i></button>
+            <button id="btnUnderline" class="chip" type="button" title="Underline"><u>U</u></button>
+            <button id="btnHighlight" class="chip" type="button" title="Highlight">🖍</button>
+          </div>
+
+          <div class="study-editor-actions">
+            <button id="btnCloseNote" class="btn btn-outline" type="button">Close</button>
+            <button id="btnSaveNote" class="btn btn-primary" type="button">Save</button>
+            <button id="btnDeleteNote" class="btn danger" type="button">Delete</button>
+          </div>
+        </div>
+
+        <!-- Editor -->
+        <div
+          id="noteEditor"
+          class="study-editor-area"
+          contenteditable="true"
+          spellcheck="true"
+          aria-label="Write your notes here"
+          data-placeholder="Start typing your notes..."
+        ></div>
+
+        <div class="study-status-row">
+          <div id="studyStatus" class="muted small"></div>
+          <div class="muted small">Tip: Tap “• List” to start bullet notes.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- New Subject Dialog -->
+  <dialog id="subjectDialog">
+    <form id="subjectForm" method="dialog" class="card" style="margin:0;max-width:560px">
+      <h4 class="dialog-title">Create Subject</h4>
+      <label>Subject Name
+        <input name="subjectName" required placeholder="e.g., Biology, Calculus, History" />
+      </label>
+      <label>Color (optional)
+        <input name="subjectColor" placeholder="e.g., Green, Blue, #E5383B" />
+      </label>
+      <menu>
+        <button type="button" id="subjectCancel" class="btn">Cancel</button>
+        <button value="ok" class="btn btn-primary">Create</button>
+      </menu>
+    </form>
+  </dialog>
+</section>
+
+        <!-- WELLNESS -->
+        <section id="sub-wellness" class="subpage">
+          <div class="pane-header">
+            <h3>Wellness & Mindset</h3>
+            <span class="badge" id="wellnessStreak">Check-ins this week: 0</span>
+          </div>
+          <div class="wellness-grid">
+            <div class="card">
+              <h4>🧊 Quick Check-in</h4>
+              <p class="muted small">How are you really feeling as a Black innovator today?</p>
+              <select id="moodSelect" class="select">
+                <option value="great">Feeling hopeful and energized ✨</option>
+                <option value="ok">I’m okay, just taking it day by day 🌱</option>
+                <option value="tired">I’m tired and a bit overwhelmed 😮‍💨</option>
+                <option value="stressed">I’m stressed and carrying a lot 🧱</option>
+              </select>
+              <button id="btnCheckin" class="btn btn-primary" style="margin-top:8px">Log Today’s Check-in</button>
+              <div id="checkinStatus" class="muted small" style="margin-top:8px"></div>
+            </div>
+
+            <div class="card">
+              <h4>💬 Affirmation for Builders</h4>
+              <p class="muted small">Remind yourself who you are while you build what doesn’t exist yet.</p>
+              <button id="btnAffirmation" class="btn">New Affirmation</button>
+              <p id="affirmationText" class="muted" style="margin-top:10px"></p>
+            </div>
+            
+            
+            <div class="card bible-card">
+  <h4>📖 Bible</h4>
+  <p class="muted small">
+    Tap below for a powerful uplifting Bible verse to strengthen your spirit, mindset, and purpose.
+  </p>
+
+  <button id="btnBibleVerse" class="btn btn-primary">Show Me a Verse</button>
+
+  <div id="bibleVerseBox" class="bible-verse-box" style="margin-top:12px">
+    <div id="bibleVerseText" class="bible-verse-text muted">
+      Your verse will appear here.
+    </div>
+    <div id="bibleVerseRef" class="bible-verse-ref muted small" style="margin-top:8px"></div>
+  </div>
+</div>
+            
+
+            <div class="card">
+              <h4>🌬 30-Second Reset</h4>
+              <p class="muted small">When your brain is spinning, take one intentional pause.</p>
+              <button id="btnBreath" class="btn">Start Guided Breathing</button>
+              <p id="breathText" class="muted small" style="margin-top:10px"></p>
+            </div>
+
+            <div class="card">
+              <h4>📓 Journal</h4>
+              <p class="muted small">Write anything on your mind. Saved privately in this browser.</p>
+              <textarea id="journalText" rows="4" placeholder="Type today’s thoughts…"></textarea>
+              <button id="btnSaveJournal" class="btn btn-primary" style="margin-top:8px">Save Entry</button>
+              <div id="journalStatus" class="muted small" style="margin-top:8px"></div>
+              <div id="journalList" class="journal-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CULTURE -->
+        <section id="sub-culture" class="subpage">
+          <div class="pane-header"><h3>Culture Cards — Innovators to Inspire</h3></div>
+          <div class="culture">
+            <div id="cultureCard" class="culture-card"></div>
+            <div class="row">
+ <button id="prevCard" class="btn">Previous</button>
+<button id="shuffleCultureCard" class="btn">🔀 Shuffle</button>
+<button id="nextCard" class="btn">Next</button>
+<button id="cardInspire" class="btn btn-primary">Inspire an Idea</button>
+            </div>
+          </div>
+        </section>
+        
+        <!-- MUSIC -->
+<section id="sub-music" class="subpage">
+  <!-- This subpage acts as the route target.
+       The actual Culture TV UI is the dock overlay below (persistent). -->
+  <div class="pane-header">
+    <h3>Music</h3>
+  </div>
+  <p class="muted small" style="margin:0 18px">
+    Loading music…
+  </p>
+</section>
+
+
+        <!-- QUESTS -->
+<section id="sub-quests" class="subpage">
+  <div class="pane-header">
+    <h3>Impact Quests</h3>
+    <span class="badge" id="xpBadge">Level 1 • 0 XP</span>
+  </div>
+
+  <!-- NEW: XP perks sentence -->
+  <p class="muted small" style="margin: 0 18px 12px;">
+    The more you use the app and stack XP, the more exclusive NSAAI perks and prizes you’ll unlock. Stay tuned—big rewards are coming!
+  </p>
+
+  <ul id="questList" class="list"></ul>
+</section>
+
+<!-- PARTNERS -->
+<section id="sub-partners" class="subpage">
+  <div class="pane-header partners-pane-header">
+    <div>
+      <h3>Organizations & Events</h3>
+      <p class="muted small">
+        Explore 100 powerful organizations, conferences, funds, festivals, accelerators, and communities Black innovators should know.
+      </p>
+    </div>
+
+    <input
+      id="partnerSearch"
+      class="search"
+      placeholder="Search organization, event, tech, funding, HBCU, media, startup…"
+    />
+  </div>
+
+  <div id="partnerModeNote" class="muted small partner-mode-note">
+    Showing all 100 organizations and events.
+  </div>
+
+  <ul id="partnerList" class="list partner-list-enhanced"></ul>
+</section>
+
+<!-- SOCIALS -->
+<section id="sub-socials" class="subpage">
+  <div class="pane-header">
+    <h3>Follow NSAAI</h3>
+  </div>
+
+  <div class="socials nsaaai-socials">
+    <a
+      href="https://www.thensaai.org/"
+      class="social-btn website"
+      aria-label="NSAAI Main Website"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="NSAAI Main Website"
+    >
+      🌐
+    </a>
+
+    <a
+      href="https://www.instagram.com/nsaai_22/"
+      class="social-btn ig"
+      aria-label="NSAAI Instagram"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="NSAAI Instagram"
+    >
+      ⌁
+    </a>
+
+    <a
+      href="https://www.linkedin.com/company/national-society-for-african-american-innovators-nsaai/"
+      class="social-btn ln"
+      aria-label="NSAAI LinkedIn"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="NSAAI LinkedIn"
+    >
+      in
+    </a>
+  </div>
+
+  <p class="muted small">
+    Stay connected with NSAAI online for updates, opportunities, events, and community news.
+  </p>
+</section>
+
+<!-- PROFILE -->
+<section id="sub-profile" class="subpage">
+  <div class="pane-header profile-header-with-logout">
+    <h3>Create / Edit Profile</h3>
+
+    <button id="profileLogoutBtn" class="btn btn-outline profile-logout-btn" type="button">
+      Log Out
+    </button>
+  </div>
+
+  <form id="profileForm" class="card profile-form-card" autocomplete="off">
+    <div class="profile-photo-row">
+      <div class="avatar-preview profile-avatar-preview">
+        <img id="avatarPreview" alt="Profile picture preview" />
+        <div id="avatarFallback" class="avatar-fallback">👤</div>
+      </div>
+
+      <div class="grow profile-photo-actions">
+        <label class="profile-upload-label">Upload Profile Picture</label>
+
+        <div class="profile-upload-buttons">
+          <button id="chooseAvatarBtn" class="btn btn-outline" type="button">
+            Choose Photo
+          </button>
+
+          <button id="removeAvatarBtn" class="btn" type="button">
+            Remove Photo
+          </button>
+        </div>
+
+        <input
+          name="avatar"
+          id="avatarInput"
+          type="file"
+          accept="image/*"
+          hidden
+        />
+
+        <p class="muted small profile-upload-help">
+          Upload any image size. You’ll be able to crop and position it before saving.
+        </p>
+      </div>
+    </div>
+
+    <input type="hidden" id="croppedAvatarData" name="croppedAvatarData" />
+
+    <label>Full Name <input name="name" required /></label>
+  <label>School / Org <input name="school" placeholder="e.g., Howard University" /></label>
+
+<label>Location 
+  <input name="location" id="profileLocation" placeholder="e.g., Miami, FL or Washington, DC" />
+</label>
+
+<label>Skills / Interests (comma-separated) <input name="skills" placeholder="AI, Product, Design" /></label>
+    <label>Website or Portfolio <input name="link" placeholder="https://…" /></label>
+    <label>Bio <textarea name="bio" rows="4" placeholder="Tell people about yourself…"></textarea></label>
+
+    <div class="row">
+      <button class="btn" type="reset">Reset</button>
+      <button class="btn btn-primary" type="submit">Save Profile</button>
+    </div>
+  </form>
+</section>
+      </div>
+          </div> <!-- /.app-content -->
+  </div> <!-- /.app-shell -->
+      <!-- PERSISTENT MUSIC DOCK (Culture TV stays mounted so audio keeps playing) -->
+<div id="musicDock" class="music-dock" aria-hidden="true">
+  <div class="music-dock-bar">
+    <button id="musicBackBtn" class="chip" type="button">← Back</button>
+    <div class="music-dock-title">Culture TV</div>
+    <button id="musicMinBtn" class="chip" type="button">▁ Minimize</button>
+  </div>
+
+  <div class="music-dock-body">
+ <iframe
+  id="cultureTvFrame"
+  title="Culture TV"
+  src="https://astounding-fox-200f78.netlify.app/"
+  loading="eager"
+  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen
+  referrerpolicy="strict-origin-when-cross-origin"
+></iframe>
+  </div>
+</div>
+
+      
+            <!-- Persistent Bottom Navigation (NEW) -->
+      <nav id="bottomNav" class="bottomnav">
+        <!-- buttons injected by JS -->
+      </nav>
+
+      
+    </section>
+  </main>
+
+  <!-- Analytics Drawer -->
+  <aside id="analytics" class="drawer hidden">
+    <div class="drawer-header">
+      <h4>Engagement Analytics</h4>
+      <button id="closeAnalytics" class="chip">Close</button>
+    </div>
+    <ul class="metrics">
+      <li><strong id="mPosts">0</strong> Posts</li>
+      <li><strong id="mLikes">0</strong> Likes</li>
+      <li><strong id="mRsvps">0</strong> RSVPs</li>
+      <li><strong id="mCheckins">0</strong> Check-ins</li>
+      <li><strong id="mApps">0</strong> Job Applications</li>
+      <li><strong id="mMinutes">0</strong> Minutes Active (today)</li>
+    </ul>
+    <div class="progress-wrap">
+      <div class="progress-label">Weekly Activity</div>
+      <div class="progress" id="sparkActivity"></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label">Connections Growth</div>
+      <div class="progress" id="sparkConnections"></div>
+    </div>
+  </aside>
+
+ <footer class="footer" id="globalFooter">
+  <small class="muted">© <span id="year"></span> NSAAI — Building a future where innovation is inclusive, visible, and unstoppable.</small>
+</footer>
+
+
+  <!-- Friend Profile Dialog (single instance) -->
+  <dialog id="friendProfileDialog">
+    <form method="dialog" class="card" style="margin:0;max-width:560px">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h3 style="margin:0;color:var(--text)" id="fpName">Profile</h3>
+        <button type="button" class="chip" id="fpClose">Close</button>
+      </div>
+      <div class="row" style="margin-top:10px;align-items:flex-start">
+        <span class="avatar" id="fpAvatar">👤</span>
+        <div>
+          <div class="muted small" id="fpSchool"></div>
+          <div class="muted small" id="fpSkills"></div>
+          <div class="muted small" id="fpAffinity"></div>
+          <p class="muted" id="fpBio" style="margin-top:8px"></p>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="fpConnect" type="button">Connect</button>
+        <button class="btn" id="fpMessage" type="button">Message</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Connections Dialog -->
+  <dialog id="connectionsDialog">
+    <form method="dialog" class="card" style="margin:0;max-width:560px">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h3 class="dialog-title" style="margin:0">Your Connections</h3>
+        <button type="button" class="chip" id="connectionsClose">Close</button>
+      </div>
+      <ul id="connectionsList" class="list" style="margin-top:10px"></ul>
+    </form>
+  </dialog>
+  
+    <!-- Culture Image Modal -->
+  <dialog id="cultureImageDialog">
+    <div class="culture-image-modal">
+      <button id="cultureImageClose" class="chip culture-image-close" type="button" aria-label="Close image">✕</button>
+
+      <img
+        id="cultureImageFull"
+        class="culture-image-full"
+        src=""
+        alt="Full culture image"
+      />
+    </div>
+  </dialog>
+
+  <!-- Messages Dialog -->
+  <dialog id="messagesDialog">
+    <form method="dialog" class="card" style="margin:0;max-width:560px">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h3 class="dialog-title" style="margin:0">Messages</h3>
+        <button type="button" class="chip" id="messagesClose">Close</button>
+      </div>
+      <div id="messagesList" class="messages-list" style="margin-top:10px"></div>
+    </form>
+  </dialog>
+  
+    <!-- Membership Success / Chapter Interest Dialog -->
+  <dialog id="membershipDialog">
+    <form id="membershipForm" method="dialog" class="card" style="margin:0;max-width:680px">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h3 class="dialog-title" style="margin:0">Welcome to NSAAI Membership</h3>
+        <button type="button" id="membershipDialogClose" class="chip">Close</button>
+      </div>
+
+      <p id="membershipSuccessText" class="muted small" style="margin-top:10px">
+        Your membership is active. You are now part of the NSAAI family.
+      </p>
+
+      <div class="membership-dialog-question">
+        <h4 style="margin-bottom:8px">Do you want to start or join a chapter?</h4>
+        <p class="muted small">
+          As a member, you can now express interest in starting or joining an official NSAAI chapter. Once submitted, you will be contacted with more information.
+        </p>
+      </div>
+
+      <div class="membership-dialog-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0">
+        <button type="button" id="btnStartOrJoinChapterYes" class="btn btn-primary">Yes, I’m Interested</button>
+        <button type="button" id="btnStartOrJoinChapterNo" class="btn btn-outline">Maybe Later</button>
+      </div>
+
+      <div id="chapterInterestWrap" class="chapter-interest-wrap hidden">
+        
+                <div id="chapterInterestStatus" class="muted small" style="margin-bottom:10px"></div>
+
+        <label>Email
+          <input id="chapterInterestEmail" name="chapterEmail" type="email" placeholder="Enter your email" />
+        </label>
+
+        <label>I want to...
+          <select id="chapterInterestType" name="chapterType" class="select">
+            <option value="">Choose one</option>
+            <option value="start">Start a chapter</option>
+            <option value="join">Join a chapter</option>
+          </select>
+        </label>
+
+        <label>Why are you interested?
+          <textarea
+            id="chapterInterestReason"
+            name="chapterReason"
+            rows="4"
+            placeholder="Share why you want to start or join a chapter..."
+          ></textarea>
+        </label>
+
+        <div class="membership-dialog-submit" style="display:flex;justify-content:flex-end;margin-top:12px">
+          <button type="submit" class="btn btn-primary">Submit Chapter Interest</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  
+  <!-- Become a Mentor Dialog -->
+<dialog id="mentorApplyDialog">
+  <form id="mentorApplyForm" method="dialog" class="card" style="margin:0;max-width:620px">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <h3 class="dialog-title" style="margin:0">Become a Mentor</h3>
+      <button type="button" id="mentorApplyClose" class="chip">Close</button>
+    </div>
+
+    <p class="muted small" style="margin-top:10px">
+      Apply to become a mentor and help guide the next generation of innovators.
+    </p>
+
+    <label>Full Name
+      <input name="name" type="text" required placeholder="Enter your full name" />
+    </label>
+
+    <label>Email
+      <input name="email" type="email" required placeholder="Enter your email" />
+    </label>
+
+    <label>Company / Organization
+      <input name="company" type="text" placeholder="Where do you work?" />
+    </label>
+
+    <label>Role / Title
+      <input name="role" type="text" placeholder="e.g., Founder, Engineer, Product Manager" />
+    </label>
+
+    <label>Mentorship Focus
+      <input name="focus" type="text" placeholder="e.g., Startups, Tech, Career Growth, Media" />
+    </label>
+
+    <label>Years of Experience
+      <input name="experience" type="text" placeholder="e.g., 5 years" />
+    </label>
+
+    <label>Why do you want to be a mentor?
+      <textarea name="reason" rows="4" placeholder="Share why you'd like to mentor innovators..." required></textarea>
+    </label>
+
+    <menu style="display:flex;gap:10px;justify-content:flex-end">
+      <button type="button" id="mentorApplyCancel" class="btn">Cancel</button>
+      <button value="ok" class="btn btn-primary">Submit Application</button>
+    </menu>
+  </form>
+</dialog>
+  
+  
+    <!-- Demo Interest / Early Access Dialog -->
+  <dialog id="demoInterestDialog">
+    <form id="demoInterestForm" class="card demo-interest-card" style="margin:0;max-width:640px" autocomplete="off">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <div>
+          <span class="badge">Early Access</span>
+          <h3 class="dialog-title" style="margin:8px 0 0">Like what you see?</h3>
+        </div>
+        <button type="button" id="demoInterestClose" class="chip" aria-label="Close popup">Close</button>
+      </div>
+
+      <p class="muted" style="margin-top:14px">
+        If the demo is speaking to you, drop your <strong>name</strong> and <strong>email</strong> to get early access to <strong>The NSAAI Platform</strong> when we officially launch.
+      </p>
+
+      <p class="muted small" style="margin-top:10px">
+        You’ll also have a chance to win something innovative, and if you know an innovator or future innovator, share this demo link with a friend or two.
+      </p>
+
+      <div class="demo-interest-callout">
+        <strong>Be early. Stay connected. Build with us.</strong>
+      </div>
+
+      <label>Full Name
+        <input
+          id="demoInterestName"
+          name="name"
+          type="text"
+          required
+          placeholder="Enter your name"
+        />
+      </label>
+
+      <label>Email
+        <input
+          id="demoInterestEmail"
+          name="email"
+          type="email"
+          required
+          placeholder="Enter your email"
+        />
+      </label>
+
+<input type="hidden" id="demoInterestSource" name="source" value="demo_popup" />
+
+      <div class="demo-interest-share-box">
+        <div class="muted small" style="margin-bottom:8px">Share this demo:</div>
+        <div class="row" style="gap:10px;flex-wrap:wrap">
+          <button type="button" id="demoInterestCopyLink" class="btn btn-outline">
+            Copy Demo Link
+          </button>
+          <button type="button" id="demoInterestShareBtn" class="btn">
+            Share with a Friend
+          </button>
+        </div>
+      </div>
+
+      <div id="demoInterestStatus" class="muted small" style="margin-top:12px"></div>
+
+      <menu style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px">
+        <button type="button" id="demoInterestMaybeLater" class="btn">Maybe Later</button>
+        <button id="demoInterestSubmit" type="submit" class="btn btn-primary">
+  Join Early Access
+</button>
+      </menu>
+    </form>
+  </dialog>
+  
+  <!-- Avatar Crop Dialog -->
+<dialog id="avatarCropDialog">
+  <div class="card avatar-crop-dialog-card" style="margin:0;max-width:760px">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <h3 class="dialog-title" style="margin:0">Crop Profile Photo</h3>
+      <button id="avatarCropClose" class="chip" type="button">Close</button>
+    </div>
+
+    <p class="muted small" style="margin-top:10px">
+      Drag to reposition your image and use zoom so it fits perfectly in the profile circle.
+    </p>
+
+    <div class="avatar-crop-stage">
+      <div id="avatarCropViewport" class="avatar-crop-viewport">
+        <img id="avatarCropImage" alt="Crop preview" />
+      </div>
+    </div>
+
+    <div class="avatar-crop-controls">
+      <label class="muted small" for="avatarZoomRange">Zoom</label>
+      <input
+        id="avatarZoomRange"
+        type="range"
+        min="1"
+        max="3"
+        step="0.01"
+        value="1"
+      />
+    </div>
+
+    <div class="avatar-crop-preview-wrap">
+      <div class="muted small">Preview</div>
+      <div class="avatar-crop-mini-preview">
+        <img id="avatarCropMiniPreview" alt="Mini cropped preview" />
+      </div>
+    </div>
+
+    <div class="row" style="justify-content:flex-end;gap:10px;margin-top:14px">
+      <button id="avatarCropCancel" class="btn" type="button">Cancel</button>
+      <button id="avatarCropApply" class="btn btn-primary" type="button">Apply Photo</button>
+    </div>
+  </div>
+</dialog>
+  
+  <!-- Global Profile Photo Preview Dialog -->
+<dialog id="profilePhotoDialog" class="profile-photo-dialog">
+  <div class="profile-photo-modal">
+    <button id="profilePhotoClose" class="chip profile-photo-close" type="button" aria-label="Close photo">✕</button>
+    <img id="profilePhotoFull" class="profile-photo-full" src="" alt="Expanded profile photo" />
+  </div>
+</dialog>
+  
+  <!-- Locked Feature Membership Dialog -->
+<dialog id="lockedFeatureDialog" class="locked-feature-dialog">
+  <div class="card locked-feature-card">
+    <button id="lockedFeatureClose" class="chip locked-feature-close" type="button" aria-label="Close">✕</button>
+
+    <div class="locked-feature-icon">🔒</div>
+    <h3 id="lockedFeatureTitle">Membership Unlock</h3>
+    <p id="lockedFeatureText" class="muted">
+      This feature is available for NSAAI members. You can still preview it, but membership unlocks the full builder experience.
+    </p>
+
+    <div class="locked-feature-actions">
+      <button id="lockedFeaturePreviewBtn" class="btn btn-outline" type="button">
+        Preview Feature
+      </button>
+      <button id="lockedFeatureJoinBtn" class="btn btn-primary" type="button" data-nav="membership">
+        Become a Member
+      </button>
+    </div>
+  </div>
+</dialog>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
+
+
+  </body>
+  
+</html>
