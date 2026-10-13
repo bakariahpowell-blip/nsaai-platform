@@ -67,7 +67,19 @@ for (let attempt = 0; attempt < 1; attempt++) {
   }
 }
 
-  const result=await response.json().catch(()=>({}));
+  const rawResponse = await response.text();
+
+console.log("Gemini response:", {
+  status: response.status,
+  body: rawResponse.slice(0, 1500)
+});
+
+let result;
+try {
+  result = JSON.parse(rawResponse);
+} catch {
+  result = {};
+}
   
 if (!response.ok) {
   const providerMessage =
