@@ -28,7 +28,10 @@ export default async (request)=>{
  try {
   const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,{
     method:'POST',signal:controller.signal,headers:{'Content-Type':'application/json','x-goog-api-key':key},
-    body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents:messages.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.text}]})),generationConfig:{temperature:0.7,maxOutputTokens:1000}})
+    body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents:messages.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.text}]})),generationConfig:{
+  maxOutputTokens:2048,
+  thinkingConfig:{thinkingLevel:"low"}
+}})
   });
   const result=await response.json().catch(()=>({}));
   
