@@ -3949,7 +3949,7 @@ function renderStudio(){
     return `
       <div class="studio-msg ${isUser ? "user" : "assistant"}">
         <div class="studio-msg-avatar">${isUser ? "🧑🏾" : "⚡"}</div>
-        <div class="studio-msg-bubble">${studioMessageHTML(m.text)}</div>
+        <div class="studio-msg-bubble">${studioMessageHTML(m.text, m.role)}</div>
       </div>
     `;
   }).join("");
