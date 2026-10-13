@@ -8273,3 +8273,200 @@ html[data-theme="light"] .partner-type-pill{
 .studio-source-note{max-width:640px;margin:4px auto 18px;text-align:center;color:var(--muted);font-size:14px;line-height:1.6;padding:0 12px}
 
 
+/* =========================================================
+   NSAAI STUDIO AI — CLEAN CHAT DESIGN
+   Add at the very bottom of your CSS file
+========================================================= */
+
+/* 1. Comfortable chat layout */
+#sub-studio .studio-messages,
+#sub-studio .studio-messages-chatgpt {
+  padding: 20px 16px;
+  gap: 20px;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* 2. Prevent message overflow */
+#sub-studio .studio-msg {
+  width: 100%;
+  min-width: 0;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* 3. Cleaner chat bubbles */
+#sub-studio .studio-msg-bubble {
+  min-width: 0;
+  max-width: min(760px, 92%);
+  padding: 18px 20px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  word-break: normal;
+  white-space: normal;
+}
+
+/* 4. Distinguish AI and user messages */
+#sub-studio .studio-msg.assistant .studio-msg-bubble {
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+#sub-studio .studio-msg.user .studio-msg-bubble {
+  background: linear-gradient(
+    135deg,
+    rgba(229, 56, 59, 0.12),
+    rgba(27, 127, 50, 0.10)
+  );
+  border: 1px solid rgba(229, 56, 59, 0.22);
+}
+
+/* 5. Markdown paragraph spacing */
+#sub-studio .studio-msg.assistant .studio-msg-bubble p {
+  margin: 0 0 12px;
+  line-height: 1.7;
+}
+
+#sub-studio .studio-msg.assistant .studio-msg-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+/* 6. Readable headings */
+#sub-studio .studio-msg.assistant .studio-msg-bubble h1,
+#sub-studio .studio-msg.assistant .studio-msg-bubble h2,
+#sub-studio .studio-msg.assistant .studio-msg-bubble h3 {
+  font-size: 17px;
+  font-weight: 750;
+  line-height: 1.4;
+  margin: 20px 0 10px;
+  color: var(--text);
+}
+
+#sub-studio .studio-msg.assistant .studio-msg-bubble
+:is(h1, h2, h3):first-child {
+  margin-top: 0;
+}
+
+/* 7. Subtle bold emphasis */
+#sub-studio .studio-msg.assistant .studio-msg-bubble strong {
+  font-weight: 750;
+  color: var(--text);
+}
+
+/* 8. Lists with comfortable spacing */
+#sub-studio .studio-msg.assistant .studio-msg-bubble ul,
+#sub-studio .studio-msg.assistant .studio-msg-bubble ol {
+  padding-left: 22px;
+  margin: 10px 0 14px;
+}
+
+#sub-studio .studio-msg.assistant .studio-msg-bubble li {
+  margin-bottom: 7px;
+  line-height: 1.6;
+}
+
+#sub-studio .studio-msg.assistant .studio-msg-bubble li:last-child {
+  margin-bottom: 0;
+}
+
+/* 9. Responsive tables */
+#sub-studio .studio-msg.assistant .studio-msg-bubble table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+#sub-studio .studio-msg.assistant .studio-msg-bubble th,
+#sub-studio .studio-msg.assistant .studio-msg-bubble td {
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+#sub-studio .studio-msg.assistant .studio-msg-bubble th {
+  background: var(--surface-4);
+  font-weight: 700;
+}
+
+/* 10. Code blocks */
+#sub-studio .studio-msg.assistant .studio-msg-bubble pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--surface-4);
+  border: 1px solid var(--border);
+  white-space: pre;
+}
+
+#sub-studio .studio-msg.assistant .studio-msg-bubble code {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* 11. Links */
+#sub-studio .studio-msg.assistant .studio-msg-bubble a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 12. Refined avatar appearance */
+#sub-studio .studio-msg-avatar {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+/* 13. Mobile optimization */
+@media (max-width: 600px) {
+  #sub-studio .studio-messages,
+  #sub-studio .studio-messages-chatgpt {
+    padding: 14px 10px;
+    gap: 16px;
+  }
+
+  #sub-studio .studio-msg {
+    gap: 8px;
+  }
+
+  #sub-studio .studio-msg-bubble,
+  #sub-studio .studio-msg.assistant .studio-msg-bubble,
+  #sub-studio .studio-msg.user .studio-msg-bubble {
+    max-width: calc(100% - 44px);
+    padding: 14px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  #sub-studio .studio-msg.assistant .studio-msg-bubble
+  :is(h1, h2, h3) {
+    font-size: 16px;
+    margin: 16px 0 8px;
+  }
+
+  #sub-studio .studio-msg-avatar {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    font-size: 14px;
+  }
+
+  #sub-studio .studio-input-wrap,
+  #sub-studio .studio-input-wrap-chatgpt {
+    padding: 12px;
+  }
+}
+
