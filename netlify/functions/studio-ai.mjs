@@ -151,7 +151,7 @@ ${citations || 'No matching source records.'}
         ],
         reasoning_effort: 'low',
         include_reasoning: false,
-        max_completion_tokens: 1200,
+        max_completion_tokens: 900,
         stream: false
       })
     });
