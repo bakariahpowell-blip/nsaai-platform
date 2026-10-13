@@ -53,7 +53,7 @@ const options = {
 
 let response;
 
-for (let attempt = 0; attempt < 3; attempt++) {
+for (let attempt = 0; attempt < 1; attempt++) {
   response = await fetch(url, options);
 
   if (![429, 500, 502, 503, 504].includes(response.status)) {
