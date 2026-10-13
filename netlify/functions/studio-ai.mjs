@@ -26,13 +26,47 @@ export default async (request)=>{
  const model=process.env.GEMINI_MODEL||'gemini-3.8-flash';
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),24000);
  try {
-  const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,{
-    method:'POST',signal:controller.signal,headers:{'Content-Type':'application/json','x-goog-api-key':key},
-    body:JSON.stringify({systemInstruction:{parts:[{text:instruction}]},contents:messages.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.text}]})),generationConfig:{
-  maxOutputTokens:2048,
-  thinkingConfig:{thinkingLevel:"low"}
-}})
-  });
+
+const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+
+const options = {
+  method: 'POST',
+  signal: controller.signal,
+  headers: {
+    'Content-Type': 'application/json',
+    'x-goog-api-key': key
+  },
+  body: JSON.stringify({
+    systemInstruction: {
+      parts: [{ text: instruction }]
+    },
+    contents: messages.map(m => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.text }]
+    })),
+    generationConfig: {
+      maxOutputTokens: 2048,
+      thinkingConfig: { thinkingLevel: 'low' }
+    }
+  })
+};
+
+let response;
+
+for (let attempt = 0; attempt < 3; attempt++) {
+  response = await fetch(url, options);
+
+  if (![429, 500, 502, 503, 504].includes(response.status)) {
+    break;
+  }
+
+  if (attempt < 2) {
+    await response.body?.cancel();
+    const delay = 1000 * (2 ** attempt) + Math.random() * 500;
+    await new Promise(resolve => setTimeout(resolve, delay));
+  }
+}
+
   const result=await response.json().catch(()=>({}));
   
 if (!response.ok) {
