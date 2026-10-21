@@ -3948,6 +3948,34 @@ function renderStudio(){
 
   titleEl.textContent = activeChat.title || "New Innovator Chat";
 
+  
+  // Display the African American innovator
+  // assigned to the current conversation.
+
+  let guideLabel = document.getElementById(
+    "studioInnovatorLabel"
+  );
+
+  if (!guideLabel) {
+    guideLabel = document.createElement("div");
+    guideLabel.id = "studioInnovatorLabel";
+    guideLabel.className = "studio-innovator-label";
+
+    titleEl.insertAdjacentElement(
+      "afterend",
+      guideLabel
+    );
+  }
+
+  if (activeChat.innovatorName) {
+    guideLabel.textContent =
+      `Guided by ${activeChat.innovatorName} · AI interpretation`;
+  } else {
+    guideLabel.textContent =
+      "Your African American innovation mentor awaits";
+  }
+
+
   const msgs = activeChat.messages || [];
   welcomeBox.style.display = msgs.length ? "none" : "grid";
 
