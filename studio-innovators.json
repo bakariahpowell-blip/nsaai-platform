@@ -1,0 +1,83 @@
+
+[
+  {
+    "id": "carver",
+    "name": "George Washington Carver",
+    "fields": ["agriculture", "environment", "science", "sustainability"],
+    "achievement": "Advanced agricultural science through research on soil improvement, crop rotation, and practical uses of crops such as peanuts and sweet potatoes.",
+    "perspective": "Explore nature, experiment patiently, and find creative uses for available resources.",
+    "source": "https://www.nps.gov/gwca/"
+  },
+  {
+    "id": "walker",
+    "name": "Madam C. J. Walker",
+    "fields": ["business", "marketing", "entrepreneurship", "branding"],
+    "achievement": "Built a successful hair-care enterprise and created economic opportunities for thousands of women through her sales network.",
+    "perspective": "Understand people's needs, build customer trust, and turn a useful product into a sustainable business.",
+    "source": "https://www.nps.gov/people/madam-c-j-walker.htm"
+  },
+  {
+    "id": "morgan",
+    "name": "Garrett Morgan",
+    "fields": ["invention", "safety", "engineering", "prototypes"],
+    "achievement": "Developed a safety hood and patented a three-position traffic signal.",
+    "perspective": "Observe everyday problems, invent practical solutions, and improve safety through experimentation.",
+    "source": "https://www.invent.org/inductees/garrett-morgan"
+  },
+  {
+    "id": "west",
+    "name": "Dr. Gladys West",
+    "fields": ["mathematics", "data", "engineering", "mapping"],
+    "achievement": "Developed mathematical models of Earth's shape using satellite data, contributing to the scientific foundations of GPS.",
+    "perspective": "Trust careful measurements, mathematical reasoning, persistence, and precision.",
+    "source": "https://www.af.mil/News/Article-Display/Article/1719472/"
+  },
+  {
+    "id": "dean",
+    "name": "Dr. Mark Dean",
+    "fields": ["computers", "software", "technology", "engineering"],
+    "achievement": "Helped develop important IBM personal computer technologies and contributed to the architecture of modern computing.",
+    "perspective": "Think systematically, build useful technology, and design components that work together.",
+    "source": "https://www.invent.org/inductees/mark-dean"
+  },
+  {
+    "id": "bath",
+    "name": "Dr. Patricia Bath",
+    "fields": ["medicine", "healthcare", "invention", "research"],
+    "achievement": "Invented the Laserphaco technique and device for cataract surgery and advanced the field of community ophthalmology.",
+    "perspective": "Identify unmet medical needs and use scientific research to improve access to care.",
+    "source": "https://www.invent.org/inductees/patricia-bath"
+  },
+  {
+    "id": "james-west",
+    "name": "Dr. James E. West",
+    "fields": ["electronics", "sound", "audio", "physics"],
+    "achievement": "Co-invented the electret microphone technology widely used in communications and audio devices.",
+    "perspective": "Understand the underlying science, test ideas rigorously, and improve technology through research.",
+    "source": "https://www.invent.org/inductees/james-west"
+  },
+  {
+    "id": "johnson",
+    "name": "Katherine Johnson",
+    "fields": ["mathematics", "space", "aerospace", "physics"],
+    "achievement": "Performed critical trajectory calculations for NASA space missions, including early human spaceflight.",
+    "perspective": "Break complex problems into manageable calculations and verify results carefully.",
+    "source": "https://www.nasa.gov/katherine-johnson/"
+  },
+  {
+    "id": "jackson",
+    "name": "Dr. Shirley Ann Jackson",
+    "fields": ["physics", "science", "research", "leadership"],
+    "achievement": "Became the first African American woman to earn a doctorate from MIT and made contributions to theoretical physics and scientific leadership.",
+    "perspective": "Pursue rigorous research, challenge assumptions, and create opportunities for future scientists.",
+    "source": "https://www.rpi.edu/"
+  },
+  {
+    "id": "croak",
+    "name": "Dr. Marian Croak",
+    "fields": ["telecommunications", "technology", "internet", "communications"],
+    "achievement": "Made major contributions to Voice over Internet Protocol technology and holds numerous patents in telecommunications.",
+    "perspective": "Build scalable systems that improve communication and connect people.",
+    "source": "https://www.invent.org/inductees/marian-croak"
+  }
+]
