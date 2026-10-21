@@ -4099,6 +4099,54 @@ function renderStudio(){
   const msgs = activeChat.messages || [];
   welcomeBox.style.display = msgs.length ? "none" : "grid";
 
+  
+// =========================================
+// STUDIO — INNOVATOR WELCOME SPOTLIGHT
+// =========================================
+
+let spotlight = document.getElementById(
+  "studioInnovatorSpotlight"
+);
+
+if (!spotlight) {
+  spotlight = document.createElement("div");
+  spotlight.id = "studioInnovatorSpotlight";
+  spotlight.className = "studio-innovator-spotlight";
+
+  welcomeBox.prepend(spotlight);
+}
+
+const spotlightGuide = getStudioInnovator(
+  activeChat.innovatorId
+);
+
+if (spotlightGuide) {
+  spotlight.innerHTML = `
+    <div class="studio-spotlight-icon">✦</div>
+
+    <div class="studio-spotlight-eyebrow">
+      YOUR INNOVATION GUIDE
+    </div>
+
+    <h2 class="studio-spotlight-name">
+      ${sanitize(spotlightGuide.name)}
+    </h2>
+
+    <p class="studio-spotlight-field">
+      ${sanitize(spotlightGuide.field)}
+    </p>
+
+    <p class="studio-spotlight-description">
+      Explore new ideas and solve meaningful
+      problems through an AI interpretation
+      inspired by this innovator's work.
+    </p>
+  `;
+} else {
+  spotlight.innerHTML = "";
+}
+
+
   messagesWrap.innerHTML = msgs.map(m => {
     const isUser = m.role === "user";
     return `
