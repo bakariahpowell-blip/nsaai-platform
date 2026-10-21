@@ -4047,31 +4047,53 @@ function renderStudio(){
   titleEl.textContent = activeChat.title || "New Innovator Chat";
 
   
-  // Display the African American innovator
-  // assigned to the current conversation.
+ 
+  // =========================================
+  // CENTERED INNOVATOR CHAT HEADER
+  // =========================================
 
-  let guideLabel = document.getElementById(
-    "studioInnovatorLabel"
+  let headerGroup = document.getElementById(
+    "studioGuideHeaderGroup"
   );
 
-  if (!guideLabel) {
-    guideLabel = document.createElement("div");
+  if (!headerGroup) {
+    headerGroup = document.createElement("div");
+    headerGroup.id = "studioGuideHeaderGroup";
+    headerGroup.className = "studio-guide-header-group";
+
+    titleEl.parentNode.insertBefore(
+      headerGroup,
+      titleEl
+    );
+
+    headerGroup.appendChild(titleEl);
+
+    const guideLabel = document.createElement("div");
     guideLabel.id = "studioInnovatorLabel";
     guideLabel.className = "studio-innovator-label";
 
-    titleEl.insertAdjacentElement(
-      "afterend",
-      guideLabel
-    );
+    headerGroup.appendChild(guideLabel);
   }
 
-  if (activeChat.innovatorName) {
+  const guide = getStudioInnovator(
+    activeChat.innovatorId
+  );
+
+  const guideLabel = document.getElementById(
+    "studioInnovatorLabel"
+  );
+
+  if (guide) {
     guideLabel.textContent =
-      `Guided by ${activeChat.innovatorName} · AI interpretation`;
+      `✦ Guided by ${guide.name} · ${guide.field}`;
+  } else if (activeChat.innovatorName) {
+    guideLabel.textContent =
+      `✦ Guided by ${activeChat.innovatorName} · AI interpretation`;
   } else {
     guideLabel.textContent =
-      "Your African American innovation mentor awaits";
+      "✦ Your African American innovation mentor awaits";
   }
+
 
 
   const msgs = activeChat.messages || [];
