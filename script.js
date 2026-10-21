@@ -3761,6 +3761,99 @@ if (els.btnHighlight && !els.btnHighlight.dataset.bound){
    STUDIO — CHATGPT-STYLE INNOVATOR ASSISTANT
 ======================================================= */
 
+
+/* =========================================
+   NSAAI STUDIO — INNOVATOR SHUFFLE
+========================================= */
+
+const STUDIO_INNOVATORS = [
+  {
+    id: "carver",
+    name: "George Washington Carver",
+    field: "Agriculture · Science · Sustainability"
+  },
+  {
+    id: "walker",
+    name: "Madam C. J. Walker",
+    field: "Entrepreneurship · Business · Marketing"
+  },
+  {
+    id: "morgan",
+    name: "Garrett Morgan",
+    field: "Engineering · Invention · Safety"
+  },
+  {
+    id: "west",
+    name: "Dr. Gladys West",
+    field: "Mathematics · Engineering · GPS"
+  },
+  {
+    id: "dean",
+    name: "Dr. Mark Dean",
+    field: "Computing · Technology · Engineering"
+  },
+  {
+    id: "bath",
+    name: "Dr. Patricia Bath",
+    field: "Medicine · Healthcare · Invention"
+  },
+  {
+    id: "james-west",
+    name: "Dr. James E. West",
+    field: "Electronics · Sound · Research"
+  },
+  {
+    id: "johnson",
+    name: "Katherine Johnson",
+    field: "Mathematics · Aerospace · Space"
+  },
+  {
+    id: "jackson",
+    name: "Dr. Shirley Ann Jackson",
+    field: "Physics · Research · Leadership"
+  },
+  {
+    id: "croak",
+    name: "Dr. Marian Croak",
+    field: "Telecommunications · Computing · Technology"
+  }
+];
+
+const STUDIO_LAST_GUIDE_KEY =
+  "nsaai-studio-last-innovator";
+
+function shuffleStudioInnovator(){
+  const lastId = localStorage.getItem(
+    STUDIO_LAST_GUIDE_KEY
+  );
+
+  const available = STUDIO_INNOVATORS.filter(
+    person => person.id !== lastId
+  );
+
+  const pool = available.length
+    ? available
+    : STUDIO_INNOVATORS;
+
+  const selected = pool[
+    Math.floor(Math.random() * pool.length)
+  ];
+
+  localStorage.setItem(
+    STUDIO_LAST_GUIDE_KEY,
+    selected.id
+  );
+
+  return selected;
+}
+
+function getStudioInnovator(id){
+  return STUDIO_INNOVATORS.find(
+    person => person.id === id
+  ) || null;
+}
+
+
 function studioChatsKey(){
   return STATE.me ? `ns-studio-chats-${STATE.me.id}` : "ns-studio-chats-demo";
 }
