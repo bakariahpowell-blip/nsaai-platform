@@ -4325,37 +4325,121 @@ function hideStudioTyping(){
 }
 
 let studioRequestBusy = false;
+
 async function submitStudioPrompt(promptText){
   const text = String(promptText || "").trim();
+
   if (!text || studioRequestBusy) return;
+
   studioRequestBusy = true;
+
   const sendBtn = document.getElementById("btnStudioSend");
   if (sendBtn) sendBtn.disabled = true;
+
   let activeChat = getActiveStudioChat(getStudioData());
-  if (!activeChat) activeChat = createNewStudioChat("New Innovator Chat");
+
+  if (!activeChat) {
+    activeChat = createNewStudioChat("New Innovator Chat");
+  }
+
   const chatId = activeChat.id;
+
   addStudioMessage(chatId, "user", text);
-  renderStudio(); showStudioTyping();
+
+  renderStudio();
+  showStudioTyping();
+
   try {
     await loadNSAAIStudioSources();
-    const chat = getStudioData().chats.find(c=>c.id===chatId);
-    const history = (chat?.messages || []).slice(-12).map(m=>({role:m.role, text:m.text}));
-    const response = await fetch('/.netlify/functions/studio-ai', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({messages:history})
-    });
-    const payload = await response.json().catch(()=>({}));
-    if (!response.ok) throw new Error(payload.error || 'Studio AI is temporarily unavailable.');
-    addStudioMessage(chatId, 'assistant', payload.reply || 'Could you tell me a little more?');
-  } catch(err) {
-    // No fabricated AI output; provide clear setup/rate-limit status.
-    addStudioMessage(chatId, 'assistant', `Studio AI couldn't connect right now. ${err.message || 'Please try again shortly.'}`);
+
+    const chat = getStudioData().chats.find(
+      c => c.id === chatId
+    );
+
+    const history = (chat?.messages || [])
+      .slice(-12)
+      .map(m => ({
+        role: m.role,
+        text: m.text
+      }));
+
+    // Send the conversation and assigned innovator.
+    const response = await fetch(
+      '/.netlify/functions/studio-ai',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          messages: history,
+          innovatorId: chat?.innovatorId || null
+        })
+      }
+    );
+
+    const payload = await response.json()
+      .catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        payload.error || 'Studio AI is temporarily unavailable.'
+      );
+    }
+
+    // Save the innovator identity in this chat.
+    if (payload.innovator) {
+      const data = getStudioData();
+
+      const currentChat = data.chats.find(
+        c => c.id === chatId
+      );
+
+      if (currentChat) {
+        currentChat.innovatorId =
+          payload.innovator.id;
+
+        currentChat.innovatorName =
+          payload.innovator.name;
+
+        currentChat.innovatorAchievement =
+          payload.innovator.achievement || null;
+
+        currentChat.innovatorSource =
+          payload.innovator.source || null;
+
+        currentChat.updatedAt =
+          new Date().toISOString();
+
+        saveStudioData(data);
+      }
+    }
+
+    addStudioMessage(
+      chatId,
+      'assistant',
+      payload.reply || 'Could you tell me a little more?'
+    );
+
+  } catch (err) {
+    addStudioMessage(
+      chatId,
+      'assistant',
+      `Studio AI couldn't connect right now. ${
+        err.message || 'Please try again shortly.'
+      }`
+    );
+
   } finally {
-    hideStudioTyping(); studioRequestBusy=false;
-    if (sendBtn) sendBtn.disabled=false;
+    hideStudioTyping();
+    studioRequestBusy = false;
+
+    if (sendBtn) sendBtn.disabled = false;
+
     renderStudio();
   }
 }
+
 
 let STUDIO_BOUND = false;
 
