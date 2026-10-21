@@ -3884,8 +3884,12 @@ function saveStudioData(data){
 }
 
 
+
 function createStudioChatObject(title="Innovator Chat"){
   const now = new Date().toISOString();
+
+  // Every new conversation gets a shuffled guide.
+  const innovator = shuffleStudioInnovator();
 
   return {
     id: uid("studio-chat"),
@@ -3893,12 +3897,13 @@ function createStudioChatObject(title="Innovator Chat"){
     createdAt: now,
     updatedAt: now,
     messages: [],
-    innovatorId: null,
-    innovatorName: null,
+    innovatorId: innovator.id,
+    innovatorName: innovator.name,
     innovatorAchievement: null,
     innovatorSource: null
   };
 }
+
 
 
 function getActiveStudioChat(data = getStudioData()){
