@@ -3790,16 +3790,23 @@ function saveStudioData(data){
   store.set(studioChatsKey(), data);
 }
 
+
 function createStudioChatObject(title="Innovator Chat"){
   const now = new Date().toISOString();
+
   return {
     id: uid("studio-chat"),
     title,
     createdAt: now,
     updatedAt: now,
-    messages: []
+    messages: [],
+    innovatorId: null,
+    innovatorName: null,
+    innovatorAchievement: null,
+    innovatorSource: null
   };
 }
+
 
 function getActiveStudioChat(data = getStudioData()){
   return data.chats.find(c => c.id === data.activeChatId) || data.chats[0] || null;
