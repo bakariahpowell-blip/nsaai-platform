@@ -3983,7 +3983,18 @@ function renderStudio(){
     const isUser = m.role === "user";
     return `
       <div class="studio-msg ${isUser ? "user" : "assistant"}">
-        <div class="studio-msg-avatar">${isUser ? "🧑🏾" : "⚡"}</div>
+        
+<div
+  class="studio-msg-avatar"
+  title="${
+    isUser
+      ? 'You'
+      : sanitize(activeChat.innovatorName || 'NSAAI Studio AI')
+  }"
+>
+  ${isUser ? "🧑🏾" : "💡"}
+</div>
+
         <div class="studio-msg-bubble">${studioMessageHTML(m.text, m.role)}</div>
       </div>
     `;
