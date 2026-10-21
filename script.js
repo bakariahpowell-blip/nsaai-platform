@@ -4654,6 +4654,35 @@ const sidebarBackdrop = $("#studioSidebarBackdrop");
 
   STUDIO_BOUND = true;
 
+  
+// Start each Studio visit with a fresh guide,
+// while keeping previous conversations saved.
+
+const visitData = getStudioData();
+const currentVisitChat = getActiveStudioChat(visitData);
+
+if (
+  currentVisitChat &&
+  (!currentVisitChat.messages ||
+   currentVisitChat.messages.length === 0)
+) {
+  // Reuse an empty chat rather than creating
+  // unnecessary blank conversations.
+  const innovator = shuffleStudioInnovator();
+
+  currentVisitChat.innovatorId = innovator.id;
+  currentVisitChat.innovatorName = innovator.name;
+  currentVisitChat.innovatorAchievement = null;
+  currentVisitChat.innovatorSource = null;
+
+  saveStudioData(visitData);
+} else {
+  // Preserve the previous conversation and
+  // start a new one for this visit.
+  createNewStudioChat("New Innovator Chat");
+}
+
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const text = input.value.trim();
