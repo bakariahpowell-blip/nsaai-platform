@@ -8470,3 +8470,29 @@ html[data-theme="light"] .partner-type-pill{
   }
 }
 
+
+
+/* =========================================
+   NSAAI STUDIO — INNOVATOR GUIDE
+========================================= */
+
+.studio-innovator-label {
+  margin-top: 6px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  color: #c49a48;
+}
+
+.studio-msg-avatar {
+  transition: transform 0.2s ease;
+}
+
+.studio-msg.assistant .studio-msg-avatar {
+  font-size: 19px;
+}
+
+
+
